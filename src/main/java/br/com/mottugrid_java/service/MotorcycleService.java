@@ -49,15 +49,15 @@ public class MotorcycleService {
         Motorcycle motorcycle = motorcycleRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Motorcycle not found with ID: " + id));
 
-        motorcycle.setModel(dto.model());
-        motorcycle.setBrand(dto.brand());
-        motorcycle.setLicensePlate(dto.licensePlate());
-        motorcycle.setEngineCapacity(dto.engineCapacity());
-        motorcycle.setPrice(dto.price());
+        motorcycle.setModel(dto.getModel());
+        motorcycle.setBrand(dto.getBrand());
+        motorcycle.setLicensePlate(dto.getLicensePlate());
+        motorcycle.setEngineCapacity(dto.getEngineCapacity());
+        motorcycle.setPrice(dto.getPrice());
 
-        if (dto.yardId() != null) {
-            Yard yard = yardRepository.findById(dto.yardId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Yard not found with ID: " + dto.yardId()));
+        if (dto.getYardId() != null) {
+            Yard yard = yardRepository.findById(dto.getYardId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Yard not found with ID: " + dto.getYardId()));
             motorcycle.setYard(yard);
         } else {
             motorcycle.setYard(null);
@@ -74,19 +74,18 @@ public class MotorcycleService {
         motorcycleRepository.delete(motorcycle);
     }
 
-
     private Motorcycle mapToEntity(MotorcycleRequestDto dto) {
         Motorcycle motorcycle = new Motorcycle();
-        motorcycle.setModel(dto.model());
-        motorcycle.setBrand(dto.brand());
-        motorcycle.setLicensePlate(dto.licensePlate());
-        motorcycle.setEngineCapacity(dto.engineCapacity());
-        motorcycle.setPrice(dto.price());
+        motorcycle.setModel(dto.getModel());
+        motorcycle.setBrand(dto.getBrand());
+        motorcycle.setLicensePlate(dto.getLicensePlate());
+        motorcycle.setEngineCapacity(dto.getEngineCapacity());
+        motorcycle.setPrice(dto.getPrice());
         motorcycle.setStatus(MotorcycleStatus.AVAILABLE); // status padrão
 
-        if (dto.yardId() != null) {
-            Yard yard = yardRepository.findById(dto.yardId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Yard not found with ID: " + dto.yardId()));
+        if (dto.getYardId() != null) {
+            Yard yard = yardRepository.findById(dto.getYardId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Yard not found with ID: " + dto.getYardId()));
             motorcycle.setYard(yard);
         }
 
@@ -94,15 +93,19 @@ public class MotorcycleService {
     }
 
     private MotorcycleResponseDto mapToResponseDto(Motorcycle motorcycle) {
-        return new MotorcycleResponseDto(
-                motorcycle.getId(),
-                motorcycle.getModel(),
-                motorcycle.getBrand(),
-                motorcycle.getLicensePlate(),
-                motorcycle.getEngineCapacity(),
-                motorcycle.getPrice(),
-                motorcycle.getYard() != null ? motorcycle.getYard().getId() : null,
-                motorcycle.getYard() != null ? motorcycle.getYard().getCode() : null
-        );
+        MotorcycleResponseDto dto = new MotorcycleResponseDto();
+        dto.setId(motorcycle.getId());
+        dto.setModel(motorcycle.getModel());
+        dto.setBrand(motorcycle.getBrand());
+        dto.setLicensePlate(motorcycle.getLicensePlate());
+        dto.setEngineCapacity(motorcycle.getEngineCapacity());
+        dto.setPrice(motorcycle.getPrice());
+
+        if (motorcycle.getYard() != null) {
+            dto.setYardId(motorcycle.getYard().getId());
+            dto.setYardCode(motorcycle.getYard().getCode());
+        }
+
+        return dto;
     }
 }

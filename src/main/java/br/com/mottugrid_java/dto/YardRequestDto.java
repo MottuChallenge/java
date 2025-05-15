@@ -1,0 +1,10 @@
+package br.com.mottugrid_java.dto;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import java.util.UUID;
+
+public record YardRequestDto(
+        @NotBlank String code,
+        @NotNull UUID branchId
+) {}
