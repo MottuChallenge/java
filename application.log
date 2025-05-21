@@ -1094,3 +1094,240 @@ java.lang.NoSuchMethodError: 'void org.springframework.web.method.ControllerAdvi
 2025-05-15T09:03:43.865-03:00  INFO 97496 --- [MottuGrid_Java] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
 2025-05-15T09:03:43.873-03:00  INFO 97496 --- [MottuGrid_Java] [main] b.c.m.MottugridJavaApplication           : Started MottugridJavaApplication in 5.999 seconds (process running for 6.641)
 2025-05-15T09:03:44.718-03:00  INFO 97496 --- [MottuGrid_Java] [http-nio-8080-exec-2] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 361 ms
+2025-05-15T09:08:05.864-03:00  INFO 97496 --- [MottuGrid_Java] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-05-15T09:08:05.879-03:00  INFO 97496 --- [MottuGrid_Java] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-05-15T09:08:05.884-03:00  INFO 97496 --- [MottuGrid_Java] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-15T09:08:05.885-03:00 DEBUG 97496 --- [MottuGrid_Java] [SpringApplicationShutdownHook] org.hibernate.SQL                        : 
+    drop table if exists alert cascade 
+2025-05-15T09:08:05.886-03:00 DEBUG 97496 --- [MottuGrid_Java] [SpringApplicationShutdownHook] org.hibernate.SQL                        : 
+    drop table if exists branch cascade 
+2025-05-15T09:08:05.887-03:00 DEBUG 97496 --- [MottuGrid_Java] [SpringApplicationShutdownHook] org.hibernate.SQL                        : 
+    drop table if exists location_event cascade 
+2025-05-15T09:08:05.888-03:00 DEBUG 97496 --- [MottuGrid_Java] [SpringApplicationShutdownHook] org.hibernate.SQL                        : 
+    drop table if exists motorcycle cascade 
+2025-05-15T09:08:05.888-03:00 DEBUG 97496 --- [MottuGrid_Java] [SpringApplicationShutdownHook] org.hibernate.SQL                        : 
+    drop table if exists sensor cascade 
+2025-05-15T09:08:05.889-03:00 DEBUG 97496 --- [MottuGrid_Java] [SpringApplicationShutdownHook] org.hibernate.SQL                        : 
+    drop table if exists yard cascade 
+2025-05-15T09:08:05.889-03:00 DEBUG 97496 --- [MottuGrid_Java] [SpringApplicationShutdownHook] org.hibernate.SQL                        : 
+    drop table if exists yard_layout cascade 
+2025-05-15T09:08:05.890-03:00 DEBUG 97496 --- [MottuGrid_Java] [SpringApplicationShutdownHook] org.hibernate.SQL                        : 
+    drop table if exists yard_zone cascade 
+2025-05-15T09:08:05.890-03:00 DEBUG 97496 --- [MottuGrid_Java] [SpringApplicationShutdownHook] org.hibernate.SQL                        : 
+    drop table if exists zone_coordinates cascade 
+2025-05-15T09:08:05.892-03:00  INFO 97496 --- [MottuGrid_Java] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : SpringBootHikariCP - Shutdown initiated...
+2025-05-15T09:08:05.899-03:00  INFO 97496 --- [MottuGrid_Java] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : SpringBootHikariCP - Shutdown completed.
+2025-05-15T22:48:59.860-03:00  INFO 9160 --- [MottuGrid_Java] [main] b.c.m.MottugridJavaApplication           : Starting MottugridJavaApplication using Java 21.0.7 with PID 9160 (C:\Users\Vinicius\Documents\ESTUDO\FIAP2Ano\Sprint1\java\target\classes started by Vinicius in C:\Users\Vinicius\Documents\ESTUDO\FIAP2Ano\Sprint1\java)
+2025-05-15T22:48:59.864-03:00  INFO 9160 --- [MottuGrid_Java] [main] b.c.m.MottugridJavaApplication           : No active profile set, falling back to 1 default profile: "default"
+2025-05-15T22:49:01.968-03:00  INFO 9160 --- [MottuGrid_Java] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-15T22:49:02.065-03:00  INFO 9160 --- [MottuGrid_Java] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 80 ms. Found 5 JPA repository interfaces.
+2025-05-15T22:49:02.812-03:00  INFO 9160 --- [MottuGrid_Java] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-05-15T22:49:02.834-03:00  INFO 9160 --- [MottuGrid_Java] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-15T22:49:02.834-03:00  INFO 9160 --- [MottuGrid_Java] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.40]
+2025-05-15T22:49:02.925-03:00  INFO 9160 --- [MottuGrid_Java] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-05-15T22:49:02.925-03:00  INFO 9160 --- [MottuGrid_Java] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2982 ms
+2025-05-15T22:49:03.238-03:00  INFO 9160 --- [MottuGrid_Java] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-15T22:49:03.366-03:00  INFO 9160 --- [MottuGrid_Java] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.13.Final
+2025-05-15T22:49:03.417-03:00  INFO 9160 --- [MottuGrid_Java] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-05-15T22:49:03.908-03:00  INFO 9160 --- [MottuGrid_Java] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-15T22:49:03.955-03:00  INFO 9160 --- [MottuGrid_Java] [main] com.zaxxer.hikari.HikariDataSource       : SpringBootHikariCP - Starting...
+2025-05-15T22:49:04.339-03:00  INFO 9160 --- [MottuGrid_Java] [main] com.zaxxer.hikari.pool.HikariPool        : SpringBootHikariCP - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2025-05-15T22:49:04.342-03:00  INFO 9160 --- [MottuGrid_Java] [main] com.zaxxer.hikari.HikariDataSource       : SpringBootHikariCP - Start completed.
+2025-05-15T22:49:04.451-03:00  INFO 9160 --- [MottuGrid_Java] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (SpringBootHikariCP)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-05-15T22:49:06.319-03:00  INFO 9160 --- [MottuGrid_Java] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-15T22:49:06.342-03:00 DEBUG 9160 --- [MottuGrid_Java] [main] org.hibernate.SQL                        : 
+    drop table if exists alert cascade 
+2025-05-15T22:49:06.349-03:00 DEBUG 9160 --- [MottuGrid_Java] [main] org.hibernate.SQL                        : 
+    drop table if exists branch cascade 
+2025-05-15T22:49:06.350-03:00 DEBUG 9160 --- [MottuGrid_Java] [main] org.hibernate.SQL                        : 
+    drop table if exists location_event cascade 
+2025-05-15T22:49:06.351-03:00 DEBUG 9160 --- [MottuGrid_Java] [main] org.hibernate.SQL                        : 
+    drop table if exists motorcycle cascade 
+2025-05-15T22:49:06.353-03:00 DEBUG 9160 --- [MottuGrid_Java] [main] org.hibernate.SQL                        : 
+    drop table if exists sensor cascade 
+2025-05-15T22:49:06.353-03:00 DEBUG 9160 --- [MottuGrid_Java] [main] org.hibernate.SQL                        : 
+    drop table if exists yard cascade 
+2025-05-15T22:49:06.353-03:00 DEBUG 9160 --- [MottuGrid_Java] [main] org.hibernate.SQL                        : 
+    drop table if exists yard_layout cascade 
+2025-05-15T22:49:06.354-03:00 DEBUG 9160 --- [MottuGrid_Java] [main] org.hibernate.SQL                        : 
+    drop table if exists yard_zone cascade 
+2025-05-15T22:49:06.354-03:00 DEBUG 9160 --- [MottuGrid_Java] [main] org.hibernate.SQL                        : 
+    drop table if exists zone_coordinates cascade 
+2025-05-15T22:49:06.362-03:00 DEBUG 9160 --- [MottuGrid_Java] [main] org.hibernate.SQL                        : 
+    create table alert (
+        is_resolved boolean not null,
+        triggered_at timestamp(6) not null,
+        id uuid not null,
+        motorcycle_id uuid,
+        message varchar(200) not null,
+        type enum ('BATTERY_LOW','MAINTENANCE_NEEDED','PROXIMITY_ALERT','SENSOR_DISCONNECTED','UNAUTHORIZED_MOVEMENT','ZONE_VIOLATION') not null,
+        primary key (id)
+    )
+2025-05-15T22:49:06.374-03:00 DEBUG 9160 --- [MottuGrid_Java] [main] org.hibernate.SQL                        : 
+    create table branch (
+        id uuid not null,
+        city varchar(50) not null,
+        country varchar(50) not null,
+        name varchar(100) not null,
+        address varchar(200) not null,
+        primary key (id)
+    )
+2025-05-15T22:49:06.377-03:00 DEBUG 9160 --- [MottuGrid_Java] [main] org.hibernate.SQL                        : 
+    create table location_event (
+        orientation float(53) not null,
+        x_position float(53) not null,
+        y_position float(53) not null,
+        timestamp timestamp(6) not null,
+        id uuid not null,
+        motorcycle_id uuid,
+        source enum ('COMPUTER_VISION','IOT_SENSOR','MANUAL_ENTRY') not null,
+        primary key (id)
+    )
+2025-05-15T22:49:06.381-03:00 DEBUG 9160 --- [MottuGrid_Java] [main] org.hibernate.SQL                        : 
+    create table motorcycle (
+        engine_capacity integer not null,
+        orientation float(53) not null,
+        price numeric(38,2) not null,
+        x_position float(53) not null,
+        y_position float(53) not null,
+        license_plate varchar(10) not null unique,
+        id uuid not null,
+        yard_id uuid,
+        brand varchar(50) not null,
+        model varchar(50) not null,
+        status enum ('AVAILABLE','DECOMMISSIONED','IN_USE','RESERVED','UNDER_MAINTENANCE') not null,
+        primary key (id)
+    )
+2025-05-15T22:49:06.388-03:00 DEBUG 9160 --- [MottuGrid_Java] [main] org.hibernate.SQL                        : 
+    create table sensor (
+        battery_level numeric(5,2) not null,
+        is_active boolean not null,
+        last_update timestamp(6) not null,
+        id uuid not null,
+        motorcycle_id uuid unique,
+        primary key (id)
+    )
+2025-05-15T22:49:06.395-03:00 DEBUG 9160 --- [MottuGrid_Java] [main] org.hibernate.SQL                        : 
+    create table yard (
+        branch_id uuid not null,
+        id uuid not null,
+        code varchar(20) not null unique,
+        primary key (id)
+    )
+2025-05-15T22:49:06.400-03:00 DEBUG 9160 --- [MottuGrid_Java] [main] org.hibernate.SQL                        : 
+    create table yard_layout (
+        last_updated timestamp(6) not null,
+        id uuid not null,
+        yard_id uuid unique,
+        image_reference varchar(255),
+        layout_data clob not null,
+        primary key (id)
+    )
+2025-05-15T22:49:06.406-03:00 DEBUG 9160 --- [MottuGrid_Java] [main] org.hibernate.SQL                        : 
+    create table yard_zone (
+        id uuid not null,
+        yard_id uuid not null,
+        zone_code varchar(20) not null,
+        type enum ('ENTRANCE','EXIT','MAINTENANCE','PARKING','STORAGE','WASHING') not null,
+        primary key (id)
+    )
+2025-05-15T22:49:06.408-03:00 DEBUG 9160 --- [MottuGrid_Java] [main] org.hibernate.SQL                        : 
+    create table zone_coordinates (
+        x float(53),
+        y float(53),
+        zone_id uuid not null
+    )
+2025-05-15T22:49:06.410-03:00 DEBUG 9160 --- [MottuGrid_Java] [main] org.hibernate.SQL                        : 
+    alter table if exists alert 
+       add constraint FKmrj2nmg8mdde879f63x0eilf6 
+       foreign key (motorcycle_id) 
+       references motorcycle
+2025-05-15T22:49:06.431-03:00 DEBUG 9160 --- [MottuGrid_Java] [main] org.hibernate.SQL                        : 
+    alter table if exists location_event 
+       add constraint FKjbhregd0awh7p8pn35rgsa6dv 
+       foreign key (motorcycle_id) 
+       references motorcycle
+2025-05-15T22:49:06.433-03:00 DEBUG 9160 --- [MottuGrid_Java] [main] org.hibernate.SQL                        : 
+    alter table if exists motorcycle 
+       add constraint FKtkiqrjvmmokcjfmstn3tprmyd 
+       foreign key (yard_id) 
+       references yard
+2025-05-15T22:49:06.436-03:00 DEBUG 9160 --- [MottuGrid_Java] [main] org.hibernate.SQL                        : 
+    alter table if exists sensor 
+       add constraint FKhbttws4p4iq8xwfhhem2pqeqp 
+       foreign key (motorcycle_id) 
+       references motorcycle
+2025-05-15T22:49:06.439-03:00 DEBUG 9160 --- [MottuGrid_Java] [main] org.hibernate.SQL                        : 
+    alter table if exists yard 
+       add constraint FKp70kewa9xq7nfgdsjipltxgc9 
+       foreign key (branch_id) 
+       references branch
+2025-05-15T22:49:06.441-03:00 DEBUG 9160 --- [MottuGrid_Java] [main] org.hibernate.SQL                        : 
+    alter table if exists yard_layout 
+       add constraint FKjb9wrs36kmk91hdh3s171fejd 
+       foreign key (yard_id) 
+       references yard
+2025-05-15T22:49:06.443-03:00 DEBUG 9160 --- [MottuGrid_Java] [main] org.hibernate.SQL                        : 
+    alter table if exists yard_zone 
+       add constraint FKf8xcr4rngqpuofhuq4k3ybtm0 
+       foreign key (yard_id) 
+       references yard
+2025-05-15T22:49:06.446-03:00 DEBUG 9160 --- [MottuGrid_Java] [main] org.hibernate.SQL                        : 
+    alter table if exists zone_coordinates 
+       add constraint FKmf32imfxk1p6vvtxp1ubt2ba 
+       foreign key (zone_id) 
+       references yard_zone
+2025-05-15T22:49:06.453-03:00  INFO 9160 --- [MottuGrid_Java] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-15T22:49:06.923-03:00  INFO 9160 --- [MottuGrid_Java] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-05-15T22:49:07.672-03:00 TRACE 9160 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.MotorcycleService.getMotorcyclesByYard' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2025-05-15T22:49:07.687-03:00 TRACE 9160 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.MotorcycleService.deleteMotorcycle' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-15T22:49:07.687-03:00 TRACE 9160 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.MotorcycleService.createMotorcycle' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-15T22:49:07.688-03:00 TRACE 9160 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.MotorcycleService.updateMotorcycle' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-15T22:49:07.688-03:00 TRACE 9160 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.MotorcycleService.getById' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2025-05-15T22:49:07.722-03:00 TRACE 9160 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.SensorService.getById' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2025-05-15T22:49:07.725-03:00 TRACE 9160 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.SensorService.createSensor' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-15T22:49:07.726-03:00 TRACE 9160 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.SensorService.deleteSensor' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-15T22:49:07.726-03:00 TRACE 9160 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.SensorService.updateSensor' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-15T22:49:07.761-03:00 TRACE 9160 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.YardService.update' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-15T22:49:07.763-03:00 TRACE 9160 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.YardService.delete' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-15T22:49:07.764-03:00 TRACE 9160 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.YardService.create' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-15T22:49:07.764-03:00 TRACE 9160 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.YardService.getAll' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2025-05-15T22:49:07.764-03:00 TRACE 9160 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.YardService.getById' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2025-05-15T22:49:07.953-03:00  WARN 9160 --- [MottuGrid_Java] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-15T22:49:08.563-03:00  INFO 9160 --- [MottuGrid_Java] [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/console'. Database available at 'jdbc:h2:mem:testdb'
+2025-05-15T22:49:08.701-03:00  INFO 9160 --- [MottuGrid_Java] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-05-15T22:49:08.702-03:00  INFO 9160 --- [MottuGrid_Java] [main] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-05-15T22:49:08.705-03:00  INFO 9160 --- [MottuGrid_Java] [main] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2025-05-15T22:49:08.707-03:00  INFO 9160 --- [MottuGrid_Java] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-05-15T22:49:08.717-03:00  INFO 9160 --- [MottuGrid_Java] [main] b.c.m.MottugridJavaApplication           : Started MottugridJavaApplication in 9.544 seconds (process running for 11.781)
+2025-05-15T22:50:56.863-03:00  INFO 9160 --- [MottuGrid_Java] [http-nio-8080-exec-10] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 952 ms
+2025-05-15T22:59:21.188-03:00  INFO 9160 --- [MottuGrid_Java] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-05-15T22:59:21.206-03:00  INFO 9160 --- [MottuGrid_Java] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-05-15T22:59:21.215-03:00  INFO 9160 --- [MottuGrid_Java] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-15T22:59:21.220-03:00 DEBUG 9160 --- [MottuGrid_Java] [SpringApplicationShutdownHook] org.hibernate.SQL                        : 
+    drop table if exists alert cascade 
+2025-05-15T22:59:21.225-03:00 DEBUG 9160 --- [MottuGrid_Java] [SpringApplicationShutdownHook] org.hibernate.SQL                        : 
+    drop table if exists branch cascade 
+2025-05-15T22:59:21.226-03:00 DEBUG 9160 --- [MottuGrid_Java] [SpringApplicationShutdownHook] org.hibernate.SQL                        : 
+    drop table if exists location_event cascade 
+2025-05-15T22:59:21.227-03:00 DEBUG 9160 --- [MottuGrid_Java] [SpringApplicationShutdownHook] org.hibernate.SQL                        : 
+    drop table if exists motorcycle cascade 
+2025-05-15T22:59:21.228-03:00 DEBUG 9160 --- [MottuGrid_Java] [SpringApplicationShutdownHook] org.hibernate.SQL                        : 
+    drop table if exists sensor cascade 
+2025-05-15T22:59:21.229-03:00 DEBUG 9160 --- [MottuGrid_Java] [SpringApplicationShutdownHook] org.hibernate.SQL                        : 
+    drop table if exists yard cascade 
+2025-05-15T22:59:21.231-03:00 DEBUG 9160 --- [MottuGrid_Java] [SpringApplicationShutdownHook] org.hibernate.SQL                        : 
+    drop table if exists yard_layout cascade 
+2025-05-15T22:59:21.235-03:00 DEBUG 9160 --- [MottuGrid_Java] [SpringApplicationShutdownHook] org.hibernate.SQL                        : 
+    drop table if exists yard_zone cascade 
+2025-05-15T22:59:21.237-03:00 DEBUG 9160 --- [MottuGrid_Java] [SpringApplicationShutdownHook] org.hibernate.SQL                        : 
+    drop table if exists zone_coordinates cascade 
+2025-05-15T22:59:21.242-03:00  INFO 9160 --- [MottuGrid_Java] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : SpringBootHikariCP - Shutdown initiated...
+2025-05-15T22:59:21.248-03:00  INFO 9160 --- [MottuGrid_Java] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : SpringBootHikariCP - Shutdown completed.
