@@ -1,80 +1,62 @@
 package br.com.mottugrid_java.service;
 
-import br.com.mottugrid_java.domainmodel.Branch;
+import br.com.mottugrid_java.dto.YardRequestDTO;
+import br.com.mottugrid_java.dto.YardResponseDTO;
 import br.com.mottugrid_java.domainmodel.Yard;
-import br.com.mottugrid_java.dto.YardRequestDto;
-import br.com.mottugrid_java.dto.YardResponseDto;
-import br.com.mottugrid_java.exception.ResourceNotFoundException;
-import br.com.mottugrid_java.repository.BranchRepository;
 import br.com.mottugrid_java.repository.YardRepository;
-import lombok.RequiredArgsConstructor;
+import jakarta.persistence.EntityNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.UUID;
 
 @Service
-@RequiredArgsConstructor
 public class YardService {
 
-    private final YardRepository yardRepository;
-    private final BranchRepository branchRepository;
+    @Autowired
+    private YardRepository yardRepository;
 
-    @Transactional
-    public YardResponseDto create(YardRequestDto dto) {
-        Branch branch = branchRepository.findById(dto.branchId())
-                .orElseThrow(() -> new ResourceNotFoundException("Branch not found"));
-
-        Yard yard = new Yard();
-        yard.setCode(dto.code());
-        yard.setBranch(branch);
-
-        yardRepository.save(yard);
-        return mapToDto(yard);
+    public YardResponseDTO create(YardRequestDTO dto) {
+        Yard yard = toEntity(dto);
+        return toResponse(yardRepository.save(yard));
     }
 
-    @Transactional(readOnly = true)
-    public YardResponseDto getById(UUID id) {
+    public YardResponseDTO getById(Long id) {
         Yard yard = yardRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Yard not found"));
-        return mapToDto(yard);
+                .orElseThrow(() -> new EntityNotFoundException("Yard não encontrada com id " + id));
+        return toResponse(yard);
     }
 
-    @Transactional(readOnly = true)
-    public List<YardResponseDto> getAll() {
-        return yardRepository.findAll().stream()
-                .map(this::mapToDto)
-                .toList();
+    public Page<YardResponseDTO> list(String name, Pageable pageable) {
+        Page<Yard> page = (name == null || name.isBlank())
+                ? yardRepository.findAll(pageable)
+                : yardRepository.findByNameContainingIgnoreCase(name, pageable);
+        return page.map(this::toResponse);
     }
 
-    @Transactional
-    public YardResponseDto update(UUID id, YardRequestDto dto) {
+    public YardResponseDTO update(Long id, YardRequestDTO dto) {
         Yard yard = yardRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Yard not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Yard não encontrada com id " + id));
 
-        Branch branch = branchRepository.findById(dto.branchId())
-                .orElseThrow(() -> new ResourceNotFoundException("Branch not found"));
+        yard.setName(dto.name());
+        // futuros campos: address, branch...
 
-        yard.setCode(dto.code());
-        yard.setBranch(branch);
-        yardRepository.save(yard);
-
-        return mapToDto(yard);
+        return toResponse(yardRepository.save(yard));
     }
 
-    @Transactional
-    public void delete(UUID id) {
-        Yard yard = yardRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Yard not found"));
-        yardRepository.delete(yard);
+    public void delete(Long id) {
+        if (!yardRepository.existsById(id)) {
+            throw new EntityNotFoundException("Yard não encontrada com id " + id);
+        }
+        yardRepository.deleteById(id);
     }
 
-    private YardResponseDto mapToDto(Yard yard) {
-        return new YardResponseDto(
-                yard.getId(),
-                yard.getCode(),
-                yard.getBranch().getId()
-        );
+    private Yard toEntity(YardRequestDTO dto) {
+        return Yard.builder()
+                .name(dto.name())
+                .build();
+    }
+
+    private YardResponseDTO toResponse(Yard yard) {
+        return new YardResponseDTO(yard.getId(), yard.getName());
     }
 }

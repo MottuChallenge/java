@@ -1,29 +1,52 @@
 package br.com.mottugrid_java.exception;
 
 import io.swagger.v3.oas.annotations.Hidden;
-import jakarta.servlet.annotation.HandlesTypes;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.context.request.WebRequest;
-import java.time.LocalDateTime;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+import java.util.stream.Collectors;
 @ControllerAdvice
 @Hidden
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleResourceNotFound(
-            ResourceNotFoundException ex, WebRequest request) {
-
-        ErrorResponse response = new ErrorResponse(
-                LocalDateTime.now(),
-                ex.getMessage(),
-                request.getDescription(false));
-
-        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    @ExceptionHandler(EntityNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Map<String, String> handleNotFound(EntityNotFoundException ex) {
+        return Map.of("error", ex.getMessage());
     }
 
-    record ErrorResponse(LocalDateTime timestamp, String message, String details) {}
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Map<String, String> handleValidationErrors(MethodArgumentNotValidException ex) {
+        var errors = ex.getBindingResult().getFieldErrors()
+                .stream()
+                .collect(Collectors.toMap(
+                        err -> err.getField(),
+                        err -> err.getDefaultMessage()
+                ));
+        return errors;
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Map<String, String> handleConstraintViolation(ConstraintViolationException ex) {
+        var errors = ex.getConstraintViolations()
+                .stream()
+                .collect(Collectors.toMap(
+                        cv -> cv.getPropertyPath().toString(),
+                        cv -> cv.getMessage()
+                ));
+        return errors;
+    }
+
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Map<String, String> handleOthers(Exception ex) {
+        return Map.of("error", "Erro interno: " + ex.getMessage());
+    }
 }

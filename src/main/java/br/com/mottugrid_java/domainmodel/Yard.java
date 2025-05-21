@@ -1,48 +1,31 @@
 package br.com.mottugrid_java.domainmodel;
 
+
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
 
-
-@AllArgsConstructor
-@NoArgsConstructor
+@Entity
+@Table(name = "yards")
 @Getter
 @Setter
-@Table(name = "yard")
-@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Yard {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Column(nullable = false, unique = true, length = 20)
-    private String code;
+    @NotBlank(message = "O nome é obrigatório")
+    private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "branch_id", nullable = false)
-    private Branch branch;
+    // Por enquanto comentado — vamos adicionar Branch e Address depois
+    // @ManyToOne(optional = false)
+    // private Branch branch;
 
-    @OneToOne(mappedBy = "yard", cascade = CascadeType.ALL)
-    private YardLayout layout;
-
-    @OneToMany(mappedBy = "yard", cascade = CascadeType.ALL)
-    private List<Motorcycle> motorcycles;
-
-    @OneToMany(mappedBy = "yard", cascade = CascadeType.ALL)
-    private List<YardZone> zones;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Yard yard)) return false;
-        return Objects.equals(id, yard.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
+    // @OneToOne(cascade = CascadeType.ALL)
+    // private Address address;
 }
+

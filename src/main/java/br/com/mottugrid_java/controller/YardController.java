@@ -1,54 +1,70 @@
 package br.com.mottugrid_java.controller;
 
-import br.com.mottugrid_java.dto.YardRequestDto;
-import br.com.mottugrid_java.dto.YardResponseDto;
+import br.com.mottugrid_java.dto.YardRequestDTO;
+import br.com.mottugrid_java.dto.YardResponseDTO;
 import br.com.mottugrid_java.service.YardService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/yards")
-@RequiredArgsConstructor
-@Tag(name = "Yard", description = "Operações relacionadas a pátios")
 public class YardController {
 
-    private final YardService yardService;
+    @Autowired
+    private YardService yardService;
 
-    @PostMapping
-    @Operation(summary = "Criar um novo pátio")
-    public ResponseEntity<YardResponseDto> create(@RequestBody @Valid YardRequestDto dto) {
-        return ResponseEntity.ok(yardService.create(dto));
-    }
-
-    @GetMapping("/{id}")
-    @Operation(summary = "Buscar pátio por ID")
-    public ResponseEntity<YardResponseDto> getById(@PathVariable UUID id) {
-        return ResponseEntity.ok(yardService.getById(id));
-    }
-
+    @Operation(summary = "Lista todos os yards com paginação, filtro opcional por nome e ordenação")
     @GetMapping
-    @Operation(summary = "Listar todos os pátios")
-    public ResponseEntity<List<YardResponseDto>> getAll() {
-        return ResponseEntity.ok(yardService.getAll());
+    public Page<YardResponseDTO> list(
+            @RequestParam(required = false) String name,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id,asc") String[] sort) {
+
+        String sortField = "id";
+        String sortDirection = "asc";
+
+        if (sort.length == 2) {
+            sortField = sort[0];
+            sortDirection = sort[1];
+        } else if (sort.length == 1) {
+            sortField = sort[0];
+        }
+
+        Sort.Direction direction = Sort.Direction.fromString(sortDirection);
+        Sort sortOrder = Sort.by(direction, sortField);
+        Pageable pageable = PageRequest.of(page, size, sortOrder);
+
+        return yardService.list(name, pageable);
     }
 
+    @Operation(summary = "Busca um yard pelo ID")
+    @GetMapping("/{id}")
+    public YardResponseDTO getById(@PathVariable Long id) {
+        return yardService.getById(id);
+    }
+
+    @Operation(summary = "Cria um novo yard")
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public YardResponseDTO create(@RequestBody @Valid YardRequestDTO dto) {
+        return yardService.create(dto);
+    }
+
+    @Operation(summary = "Atualiza um yard existente pelo ID")
     @PutMapping("/{id}")
-    @Operation(summary = "Atualizar um pátio")
-    public ResponseEntity<YardResponseDto> update(@PathVariable UUID id, @RequestBody @Valid YardRequestDto dto) {
-        return ResponseEntity.ok(yardService.update(id, dto));
+    public YardResponseDTO update(@PathVariable Long id, @RequestBody @Valid YardRequestDTO dto) {
+        return yardService.update(id, dto);
     }
 
+    @Operation(summary = "Remove um yard pelo ID")
     @DeleteMapping("/{id}")
-    @Operation(summary = "Deletar um pátio")
-    public ResponseEntity<Void> delete(@PathVariable UUID id) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
         yardService.delete(id);
-        return ResponseEntity.noContent().build();
     }
 }
