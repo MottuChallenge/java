@@ -25,7 +25,7 @@ Este projeto é uma API REST desenvolvida em Java com Spring Boot para gerenciam
 2. Clone este repositório:  
    ```bash
    git clone https://github.com/MottuChallenge/java.git
-   cd java**
+   cd java
    
 ## Como Executar
 
@@ -42,12 +42,12 @@ spring.jpa.properties.hibernate.format_sql=true
 
 
 4. Compile e rode a aplicação com Maven ou Gradle:  
-```bash
-./mvnw spring-boot:run
+```bash```
+```./mvnw spring-boot:run```
 
 5. A aplicação iniciará na porta padrão 8080.
 
-## Utilizando o Swagger (Documentação da API)
+##Utilizando o Swagger (Documentação da API)
 
 Após iniciar a aplicação, acesse a interface do Swagger para visualizar e testar os endpoints da API:
 
