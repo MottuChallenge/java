@@ -1979,3 +1979,807 @@ Caused by: java.lang.Throwable: null
 2025-05-23T09:03:17.955-03:00  INFO 18396 --- [MottuGrid_Java] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2025-05-23T09:03:17.956-03:00  INFO 18396 --- [MottuGrid_Java] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : SpringBootHikariCP - Shutdown initiated...
 2025-05-23T09:03:18.070-03:00  INFO 18396 --- [MottuGrid_Java] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : SpringBootHikariCP - Shutdown completed.
+2025-05-23T11:25:27.749-03:00  INFO 27175 --- [MottuGrid_Java] [main] b.c.m.MottugridJavaApplication           : Starting MottugridJavaApplication using Java 21.0.7 with PID 27175 (/home/vinicius/Documentos/Estudos/Sprints/java/target/classes started by vinicius in /home/vinicius/Documentos/Estudos/Sprints/java)
+2025-05-23T11:25:27.750-03:00  INFO 27175 --- [MottuGrid_Java] [main] b.c.m.MottugridJavaApplication           : No active profile set, falling back to 1 default profile: "default"
+2025-05-23T11:25:28.103-03:00  INFO 27175 --- [MottuGrid_Java] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-23T11:25:28.128-03:00  INFO 27175 --- [MottuGrid_Java] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 21 ms. Found 3 JPA repository interfaces.
+2025-05-23T11:25:28.324-03:00  INFO 27175 --- [MottuGrid_Java] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-05-23T11:25:28.331-03:00  INFO 27175 --- [MottuGrid_Java] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-23T11:25:28.331-03:00  INFO 27175 --- [MottuGrid_Java] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.40]
+2025-05-23T11:25:28.351-03:00  INFO 27175 --- [MottuGrid_Java] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-05-23T11:25:28.352-03:00  INFO 27175 --- [MottuGrid_Java] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 582 ms
+2025-05-23T11:25:28.431-03:00  INFO 27175 --- [MottuGrid_Java] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-23T11:25:28.453-03:00  INFO 27175 --- [MottuGrid_Java] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.13.Final
+2025-05-23T11:25:28.466-03:00  INFO 27175 --- [MottuGrid_Java] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-05-23T11:25:28.583-03:00  INFO 27175 --- [MottuGrid_Java] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-23T11:25:28.596-03:00  INFO 27175 --- [MottuGrid_Java] [main] com.zaxxer.hikari.HikariDataSource       : SpringBootHikariCP - Starting...
+2025-05-23T11:25:29.026-03:00  INFO 27175 --- [MottuGrid_Java] [main] com.zaxxer.hikari.pool.HikariPool        : SpringBootHikariCP - Added connection oracle.jdbc.driver.T4CConnection@5fa0141f
+2025-05-23T11:25:29.027-03:00  INFO 27175 --- [MottuGrid_Java] [main] com.zaxxer.hikari.HikariDataSource       : SpringBootHikariCP - Start completed.
+2025-05-23T11:25:29.165-03:00  WARN 27175 --- [MottuGrid_Java] [main] org.hibernate.orm.deprecation            : HHH90000025: OracleDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-23T11:25:29.222-03:00  INFO 27175 --- [MottuGrid_Java] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (SpringBootHikariCP)']
+	Database driver: undefined/unknown
+	Database version: 19.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-05-23T11:25:29.662-03:00  INFO 27175 --- [MottuGrid_Java] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-23T11:25:37.035-03:00 DEBUG 27175 --- [MottuGrid_Java] [main] org.hibernate.SQL                        : 
+    create table motorcycles (
+        id raw(16) not null,
+        manufacturer varchar2(255 char) not null,
+        model varchar2(255 char) not null,
+        plate varchar2(255 char) not null,
+        year number(10,0) not null,
+        yard_id VARCHAR2(36) not null,
+        primary key (id)
+    )
+2025-05-23T11:25:37.240-03:00 DEBUG 27175 --- [MottuGrid_Java] [main] org.hibernate.SQL                        : 
+    alter table yards 
+       modify id VARCHAR2(36)
+2025-05-23T11:25:37.297-03:00 DEBUG 27175 --- [MottuGrid_Java] [main] org.hibernate.SQL                        : 
+    alter table motorcycles 
+       drop constraint UKmc0da3lw566xo37sbixr84lhy
+2025-05-23T11:25:37.328-03:00 DEBUG 27175 --- [MottuGrid_Java] [main] org.hibernate.SQL                        : 
+    alter table motorcycles 
+       add constraint UKmc0da3lw566xo37sbixr84lhy unique (plate)
+2025-05-23T11:25:37.380-03:00 DEBUG 27175 --- [MottuGrid_Java] [main] org.hibernate.SQL                        : 
+    alter table motorcycles 
+       add constraint FKi5cmhpouug0t62hntb7b04235 
+       foreign key (yard_id) 
+       references yards
+2025-05-23T11:25:40.025-03:00  INFO 27175 --- [MottuGrid_Java] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-23T11:25:40.166-03:00 TRACE 27175 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.BranchService.update' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-23T11:25:40.189-03:00 TRACE 27175 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.BranchService.delete' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-23T11:25:40.190-03:00 TRACE 27175 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.BranchService.create' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-23T11:25:40.215-03:00 TRACE 27175 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.MotorcycleService.update' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-23T11:25:40.215-03:00 TRACE 27175 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.MotorcycleService.delete' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-23T11:25:40.216-03:00 TRACE 27175 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.MotorcycleService.create' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-23T11:25:40.222-03:00 TRACE 27175 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.YardService.update' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-23T11:25:40.223-03:00 TRACE 27175 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.YardService.delete' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-23T11:25:40.223-03:00 TRACE 27175 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.YardService.create' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-23T11:25:40.276-03:00  WARN 27175 --- [MottuGrid_Java] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-23T11:25:40.474-03:00  INFO 27175 --- [MottuGrid_Java] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-05-23T11:25:40.474-03:00  INFO 27175 --- [MottuGrid_Java] [main] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-05-23T11:25:40.475-03:00  INFO 27175 --- [MottuGrid_Java] [main] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2025-05-23T11:25:40.475-03:00  INFO 27175 --- [MottuGrid_Java] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-05-23T11:25:40.481-03:00  INFO 27175 --- [MottuGrid_Java] [main] b.c.m.MottugridJavaApplication           : Started MottugridJavaApplication in 12.961 seconds (process running for 13.242)
+2025-05-23T11:25:47.742-03:00  INFO 27175 --- [MottuGrid_Java] [http-nio-8080-exec-4] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 232 ms
+2025-05-23T11:27:19.355-03:00  INFO 27175 --- [MottuGrid_Java] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-05-23T11:27:19.357-03:00  INFO 27175 --- [MottuGrid_Java] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-05-23T11:27:19.359-03:00  INFO 27175 --- [MottuGrid_Java] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-23T11:27:19.360-03:00  INFO 27175 --- [MottuGrid_Java] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : SpringBootHikariCP - Shutdown initiated...
+2025-05-23T11:27:19.480-03:00  INFO 27175 --- [MottuGrid_Java] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : SpringBootHikariCP - Shutdown completed.
+2025-05-23T11:27:21.757-03:00  INFO 27501 --- [MottuGrid_Java] [main] b.c.m.MottugridJavaApplication           : Starting MottugridJavaApplication using Java 21.0.7 with PID 27501 (/home/vinicius/Documentos/Estudos/Sprints/java/target/classes started by vinicius in /home/vinicius/Documentos/Estudos/Sprints/java)
+2025-05-23T11:27:21.758-03:00  INFO 27501 --- [MottuGrid_Java] [main] b.c.m.MottugridJavaApplication           : No active profile set, falling back to 1 default profile: "default"
+2025-05-23T11:27:22.104-03:00  INFO 27501 --- [MottuGrid_Java] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-23T11:27:22.134-03:00  INFO 27501 --- [MottuGrid_Java] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 25 ms. Found 3 JPA repository interfaces.
+2025-05-23T11:27:22.343-03:00  INFO 27501 --- [MottuGrid_Java] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-05-23T11:27:22.350-03:00  INFO 27501 --- [MottuGrid_Java] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-23T11:27:22.351-03:00  INFO 27501 --- [MottuGrid_Java] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.40]
+2025-05-23T11:27:22.374-03:00  INFO 27501 --- [MottuGrid_Java] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-05-23T11:27:22.374-03:00  INFO 27501 --- [MottuGrid_Java] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 596 ms
+2025-05-23T11:27:22.469-03:00  INFO 27501 --- [MottuGrid_Java] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-23T11:27:22.493-03:00  INFO 27501 --- [MottuGrid_Java] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.13.Final
+2025-05-23T11:27:22.508-03:00  INFO 27501 --- [MottuGrid_Java] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-05-23T11:27:22.645-03:00  INFO 27501 --- [MottuGrid_Java] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-23T11:27:22.665-03:00  INFO 27501 --- [MottuGrid_Java] [main] com.zaxxer.hikari.HikariDataSource       : SpringBootHikariCP - Starting...
+2025-05-23T11:27:23.084-03:00  INFO 27501 --- [MottuGrid_Java] [main] com.zaxxer.hikari.pool.HikariPool        : SpringBootHikariCP - Added connection oracle.jdbc.driver.T4CConnection@4bbc21bd
+2025-05-23T11:27:23.085-03:00  INFO 27501 --- [MottuGrid_Java] [main] com.zaxxer.hikari.HikariDataSource       : SpringBootHikariCP - Start completed.
+2025-05-23T11:27:23.217-03:00  WARN 27501 --- [MottuGrid_Java] [main] org.hibernate.orm.deprecation            : HHH90000025: OracleDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-23T11:27:23.266-03:00  INFO 27501 --- [MottuGrid_Java] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (SpringBootHikariCP)']
+	Database driver: undefined/unknown
+	Database version: 19.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-05-23T11:27:23.711-03:00  INFO 27501 --- [MottuGrid_Java] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-23T11:27:30.908-03:00 DEBUG 27501 --- [MottuGrid_Java] [main] org.hibernate.SQL                        : 
+    alter table motorcycles 
+       modify yard_id VARCHAR2(36)
+2025-05-23T11:27:31.015-03:00 DEBUG 27501 --- [MottuGrid_Java] [main] org.hibernate.SQL                        : 
+    alter table yards 
+       modify id VARCHAR2(36)
+2025-05-23T11:27:35.991-03:00  INFO 27501 --- [MottuGrid_Java] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-23T11:27:36.124-03:00 TRACE 27501 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.BranchService.update' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-23T11:27:36.147-03:00 TRACE 27501 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.BranchService.delete' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-23T11:27:36.147-03:00 TRACE 27501 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.BranchService.create' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-23T11:27:36.172-03:00 TRACE 27501 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.MotorcycleService.update' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-23T11:27:36.173-03:00 TRACE 27501 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.MotorcycleService.delete' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-23T11:27:36.173-03:00 TRACE 27501 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.MotorcycleService.create' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-23T11:27:36.179-03:00 TRACE 27501 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.YardService.update' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-23T11:27:36.180-03:00 TRACE 27501 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.YardService.delete' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-23T11:27:36.180-03:00 TRACE 27501 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.YardService.create' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-23T11:27:36.232-03:00  WARN 27501 --- [MottuGrid_Java] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-23T11:27:36.431-03:00  INFO 27501 --- [MottuGrid_Java] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-05-23T11:27:36.432-03:00  INFO 27501 --- [MottuGrid_Java] [main] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-05-23T11:27:36.432-03:00  INFO 27501 --- [MottuGrid_Java] [main] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2025-05-23T11:27:36.433-03:00  INFO 27501 --- [MottuGrid_Java] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-05-23T11:27:36.437-03:00  INFO 27501 --- [MottuGrid_Java] [main] b.c.m.MottugridJavaApplication           : Started MottugridJavaApplication in 14.882 seconds (process running for 15.16)
+2025-05-23T11:27:48.856-03:00  INFO 27501 --- [MottuGrid_Java] [http-nio-8080-exec-4] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 212 ms
+2025-05-23T11:29:26.173-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]
+2025-05-23T11:29:26.226-03:00 DEBUG 27501 --- [MottuGrid_Java] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
+    select
+        y1_0.id,
+        y1_0.branch_id,
+        y1_0.name 
+    from
+        yards y1_0 
+    order by
+        y1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+2025-05-23T11:29:26.260-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]
+2025-05-23T11:29:26.274-03:00  WARN 27501 --- [MottuGrid_Java] [http-nio-8080-exec-7] ration$PageModule$WarningLoggingModifier : Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
+	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
+
+2025-05-23T11:29:27.004-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-8] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]
+2025-05-23T11:29:27.005-03:00 DEBUG 27501 --- [MottuGrid_Java] [http-nio-8080-exec-8] org.hibernate.SQL                        : 
+    select
+        y1_0.id,
+        y1_0.branch_id,
+        y1_0.name 
+    from
+        yards y1_0 
+    order by
+        y1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+2025-05-23T11:29:27.024-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-8] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]
+2025-05-23T11:29:47.156-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : Getting transaction for [br.com.mottugrid_java.service.MotorcycleService.create]
+2025-05-23T11:29:47.156-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:29:47.160-03:00 DEBUG 27501 --- [MottuGrid_Java] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
+    select
+        y1_0.id,
+        y1_0.branch_id,
+        y1_0.name 
+    from
+        yards y1_0 
+    where
+        y1_0.id=?
+2025-05-23T11:29:47.178-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:29:47.178-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : Completing transaction for [br.com.mottugrid_java.service.MotorcycleService.create] after exception: jakarta.persistence.EntityNotFoundException: Yard não encontrada com id 37313032-3641-4637-3033-374134373646
+2025-05-23T11:29:48.237-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-10] o.s.t.i.TransactionInterceptor           : Getting transaction for [br.com.mottugrid_java.service.MotorcycleService.create]
+2025-05-23T11:29:48.237-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-10] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:29:48.238-03:00 DEBUG 27501 --- [MottuGrid_Java] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
+    select
+        y1_0.id,
+        y1_0.branch_id,
+        y1_0.name 
+    from
+        yards y1_0 
+    where
+        y1_0.id=?
+2025-05-23T11:29:48.254-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-10] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:29:48.254-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-10] o.s.t.i.TransactionInterceptor           : Completing transaction for [br.com.mottugrid_java.service.MotorcycleService.create] after exception: jakarta.persistence.EntityNotFoundException: Yard não encontrada com id 37313032-3641-4637-3033-374134373646
+2025-05-23T11:30:23.056-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-1] o.s.t.i.TransactionInterceptor           : Getting transaction for [br.com.mottugrid_java.service.MotorcycleService.create]
+2025-05-23T11:30:23.057-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-1] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:30:23.057-03:00 DEBUG 27501 --- [MottuGrid_Java] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
+    select
+        y1_0.id,
+        y1_0.branch_id,
+        y1_0.name 
+    from
+        yards y1_0 
+    where
+        y1_0.id=?
+2025-05-23T11:30:23.076-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-1] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:30:23.076-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-1] o.s.t.i.TransactionInterceptor           : Completing transaction for [br.com.mottugrid_java.service.MotorcycleService.create] after exception: jakarta.persistence.EntityNotFoundException: Yard não encontrada com id 37313032-3641-4637-3033-374134373646
+2025-05-23T11:31:42.176-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-3] o.s.t.i.TransactionInterceptor           : Getting transaction for [br.com.mottugrid_java.service.YardService.create]
+2025-05-23T11:31:42.176-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-3] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:31:42.177-03:00 DEBUG 27501 --- [MottuGrid_Java] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
+    select
+        b1_0.id,
+        b1_0.city,
+        b1_0.name,
+        b1_0.phone,
+        b1_0.state 
+    from
+        branches b1_0 
+    where
+        b1_0.id=?
+2025-05-23T11:31:42.198-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-3] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:31:42.198-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-3] o.s.t.i.TransactionInterceptor           : Completing transaction for [br.com.mottugrid_java.service.YardService.create] after exception: jakarta.persistence.EntityNotFoundException: Branch não encontrada com id 3fa85f64-5717-4562-b3fc-2c963f66afa6
+2025-05-23T11:31:43.367-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-4] o.s.t.i.TransactionInterceptor           : Getting transaction for [br.com.mottugrid_java.service.YardService.create]
+2025-05-23T11:31:43.367-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-4] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:31:43.368-03:00 DEBUG 27501 --- [MottuGrid_Java] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
+    select
+        b1_0.id,
+        b1_0.city,
+        b1_0.name,
+        b1_0.phone,
+        b1_0.state 
+    from
+        branches b1_0 
+    where
+        b1_0.id=?
+2025-05-23T11:31:43.387-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-4] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:31:43.387-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-4] o.s.t.i.TransactionInterceptor           : Completing transaction for [br.com.mottugrid_java.service.YardService.create] after exception: jakarta.persistence.EntityNotFoundException: Branch não encontrada com id 3fa85f64-5717-4562-b3fc-2c963f66afa6
+2025-05-23T11:31:51.517-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-5] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]
+2025-05-23T11:31:51.518-03:00 DEBUG 27501 --- [MottuGrid_Java] [http-nio-8080-exec-5] org.hibernate.SQL                        : 
+    select
+        b1_0.id,
+        b1_0.city,
+        b1_0.name,
+        b1_0.phone,
+        b1_0.state 
+    from
+        branches b1_0 
+    order by
+        b1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+2025-05-23T11:31:51.543-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-5] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]
+2025-05-23T11:31:52.536-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-6] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]
+2025-05-23T11:31:52.537-03:00 DEBUG 27501 --- [MottuGrid_Java] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
+    select
+        b1_0.id,
+        b1_0.city,
+        b1_0.name,
+        b1_0.phone,
+        b1_0.state 
+    from
+        branches b1_0 
+    order by
+        b1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+2025-05-23T11:31:52.556-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-6] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]
+2025-05-23T11:32:09.349-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : Getting transaction for [br.com.mottugrid_java.service.YardService.create]
+2025-05-23T11:32:09.349-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:32:09.349-03:00 DEBUG 27501 --- [MottuGrid_Java] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
+    select
+        b1_0.id,
+        b1_0.city,
+        b1_0.name,
+        b1_0.phone,
+        b1_0.state 
+    from
+        branches b1_0 
+    where
+        b1_0.id=?
+2025-05-23T11:32:09.369-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:32:09.370-03:00 DEBUG 27501 --- [MottuGrid_Java] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
+    select
+        y1_0.branch_id,
+        y1_0.id,
+        y1_0.name 
+    from
+        yards y1_0 
+    where
+        y1_0.branch_id=?
+2025-05-23T11:32:09.394-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2025-05-23T11:32:09.402-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2025-05-23T11:32:09.402-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : Completing transaction for [br.com.mottugrid_java.service.YardService.create]
+2025-05-23T11:32:09.416-03:00 DEBUG 27501 --- [MottuGrid_Java] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
+    insert 
+    into
+        yards
+        (branch_id, name, id) 
+    values
+        (?, ?, ?)
+2025-05-23T11:32:11.786-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-8] o.s.t.i.TransactionInterceptor           : Getting transaction for [br.com.mottugrid_java.service.YardService.create]
+2025-05-23T11:32:11.786-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-8] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:32:11.787-03:00 DEBUG 27501 --- [MottuGrid_Java] [http-nio-8080-exec-8] org.hibernate.SQL                        : 
+    select
+        b1_0.id,
+        b1_0.city,
+        b1_0.name,
+        b1_0.phone,
+        b1_0.state 
+    from
+        branches b1_0 
+    where
+        b1_0.id=?
+2025-05-23T11:32:11.806-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-8] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:32:11.806-03:00 DEBUG 27501 --- [MottuGrid_Java] [http-nio-8080-exec-8] org.hibernate.SQL                        : 
+    select
+        y1_0.branch_id,
+        y1_0.id,
+        y1_0.name 
+    from
+        yards y1_0 
+    where
+        y1_0.branch_id=?
+2025-05-23T11:32:11.823-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-8] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2025-05-23T11:32:11.823-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-8] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2025-05-23T11:32:11.823-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-8] o.s.t.i.TransactionInterceptor           : Completing transaction for [br.com.mottugrid_java.service.YardService.create]
+2025-05-23T11:32:11.824-03:00 DEBUG 27501 --- [MottuGrid_Java] [http-nio-8080-exec-8] org.hibernate.SQL                        : 
+    insert 
+    into
+        yards
+        (branch_id, name, id) 
+    values
+        (?, ?, ?)
+2025-05-23T11:32:50.859-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-10] o.s.t.i.TransactionInterceptor           : Getting transaction for [br.com.mottugrid_java.service.MotorcycleService.create]
+2025-05-23T11:32:50.860-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-10] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:32:50.860-03:00 DEBUG 27501 --- [MottuGrid_Java] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
+    select
+        y1_0.id,
+        y1_0.branch_id,
+        y1_0.name 
+    from
+        yards y1_0 
+    where
+        y1_0.id=?
+2025-05-23T11:32:50.877-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-10] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:32:50.878-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-10] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2025-05-23T11:32:50.878-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-10] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2025-05-23T11:32:50.878-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-10] o.s.t.i.TransactionInterceptor           : Completing transaction for [br.com.mottugrid_java.service.MotorcycleService.create]
+2025-05-23T11:32:50.879-03:00 DEBUG 27501 --- [MottuGrid_Java] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
+    insert 
+    into
+        motorcycles
+        (manufacturer, model, plate, yard_id, year, id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-05-23T11:32:52.743-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-1] o.s.t.i.TransactionInterceptor           : Getting transaction for [br.com.mottugrid_java.service.MotorcycleService.create]
+2025-05-23T11:32:52.743-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-1] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:32:52.744-03:00 DEBUG 27501 --- [MottuGrid_Java] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
+    select
+        y1_0.id,
+        y1_0.branch_id,
+        y1_0.name 
+    from
+        yards y1_0 
+    where
+        y1_0.id=?
+2025-05-23T11:32:52.763-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-1] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:32:52.763-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-1] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2025-05-23T11:32:52.764-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-1] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2025-05-23T11:32:52.764-03:00 TRACE 27501 --- [MottuGrid_Java] [http-nio-8080-exec-1] o.s.t.i.TransactionInterceptor           : Completing transaction for [br.com.mottugrid_java.service.MotorcycleService.create]
+2025-05-23T11:32:52.764-03:00 DEBUG 27501 --- [MottuGrid_Java] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
+    insert 
+    into
+        motorcycles
+        (manufacturer, model, plate, yard_id, year, id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-05-23T11:32:52.797-03:00  INFO 27501 --- [MottuGrid_Java] [http-nio-8080-exec-1] org.hibernate.orm.jdbc.batch             : HHH100503: On release of batch it still contained JDBC statements
+2025-05-23T11:32:52.798-03:00  WARN 27501 --- [MottuGrid_Java] [http-nio-8080-exec-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1, SQLState: 23000
+2025-05-23T11:32:52.798-03:00 ERROR 27501 --- [MottuGrid_Java] [http-nio-8080-exec-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : ORA-00001: restrição exclusiva (RM556182.UKMC0DA3LW566XO37SBIXR84LHY) violada
+
+2025-05-23T11:35:57.709-03:00  INFO 27501 --- [MottuGrid_Java] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-05-23T11:35:57.710-03:00  INFO 27501 --- [MottuGrid_Java] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-05-23T11:35:57.712-03:00  INFO 27501 --- [MottuGrid_Java] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-23T11:35:57.713-03:00  INFO 27501 --- [MottuGrid_Java] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : SpringBootHikariCP - Shutdown initiated...
+2025-05-23T11:36:07.713-03:00  WARN 27501 --- [MottuGrid_Java] [SpringApplicationShutdownHook] com.zaxxer.hikari.pool.HikariPool        : Timed-out waiting for close connection executor to shutdown
+2025-05-23T11:36:07.714-03:00  INFO 27501 --- [MottuGrid_Java] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : SpringBootHikariCP - Shutdown completed.
+2025-05-23T11:36:09.468-03:00  INFO 28242 --- [MottuGrid_Java] [main] b.c.m.MottugridJavaApplication           : Starting MottugridJavaApplication using Java 21.0.7 with PID 28242 (/home/vinicius/Documentos/Estudos/Sprints/java/target/classes started by vinicius in /home/vinicius/Documentos/Estudos/Sprints/java)
+2025-05-23T11:36:09.469-03:00  INFO 28242 --- [MottuGrid_Java] [main] b.c.m.MottugridJavaApplication           : No active profile set, falling back to 1 default profile: "default"
+2025-05-23T11:36:09.802-03:00  INFO 28242 --- [MottuGrid_Java] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-23T11:36:09.827-03:00  INFO 28242 --- [MottuGrid_Java] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 21 ms. Found 3 JPA repository interfaces.
+2025-05-23T11:36:10.009-03:00  INFO 28242 --- [MottuGrid_Java] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-05-23T11:36:10.016-03:00  INFO 28242 --- [MottuGrid_Java] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-23T11:36:10.016-03:00  INFO 28242 --- [MottuGrid_Java] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.40]
+2025-05-23T11:36:10.036-03:00  INFO 28242 --- [MottuGrid_Java] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-05-23T11:36:10.037-03:00  INFO 28242 --- [MottuGrid_Java] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 548 ms
+2025-05-23T11:36:10.119-03:00  INFO 28242 --- [MottuGrid_Java] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-23T11:36:10.140-03:00  INFO 28242 --- [MottuGrid_Java] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.13.Final
+2025-05-23T11:36:10.154-03:00  INFO 28242 --- [MottuGrid_Java] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-05-23T11:36:10.282-03:00  INFO 28242 --- [MottuGrid_Java] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-23T11:36:10.296-03:00  INFO 28242 --- [MottuGrid_Java] [main] com.zaxxer.hikari.HikariDataSource       : SpringBootHikariCP - Starting...
+2025-05-23T11:36:10.709-03:00  INFO 28242 --- [MottuGrid_Java] [main] com.zaxxer.hikari.pool.HikariPool        : SpringBootHikariCP - Added connection oracle.jdbc.driver.T4CConnection@4bbc21bd
+2025-05-23T11:36:10.710-03:00  INFO 28242 --- [MottuGrid_Java] [main] com.zaxxer.hikari.HikariDataSource       : SpringBootHikariCP - Start completed.
+2025-05-23T11:36:10.845-03:00  WARN 28242 --- [MottuGrid_Java] [main] org.hibernate.orm.deprecation            : HHH90000025: OracleDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-23T11:36:10.899-03:00  INFO 28242 --- [MottuGrid_Java] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (SpringBootHikariCP)']
+	Database driver: undefined/unknown
+	Database version: 19.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-05-23T11:36:11.328-03:00  INFO 28242 --- [MottuGrid_Java] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-23T11:36:17.612-03:00 DEBUG 28242 --- [MottuGrid_Java] [main] org.hibernate.SQL                        : 
+    alter table motorcycles 
+       modify yard_id VARCHAR2(36)
+2025-05-23T11:36:17.694-03:00 DEBUG 28242 --- [MottuGrid_Java] [main] org.hibernate.SQL                        : 
+    alter table yards 
+       modify id VARCHAR2(36)
+2025-05-23T11:36:22.477-03:00  INFO 28242 --- [MottuGrid_Java] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-23T11:36:22.612-03:00 TRACE 28242 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.BranchService.update' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-23T11:36:22.636-03:00 TRACE 28242 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.BranchService.delete' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-23T11:36:22.636-03:00 TRACE 28242 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.BranchService.create' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-23T11:36:22.676-03:00 TRACE 28242 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.MotorcycleService.update' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-23T11:36:22.677-03:00 TRACE 28242 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.MotorcycleService.delete' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-23T11:36:22.677-03:00 TRACE 28242 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.MotorcycleService.create' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-23T11:36:22.684-03:00 TRACE 28242 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.YardService.update' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-23T11:36:22.685-03:00 TRACE 28242 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.YardService.delete' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-23T11:36:22.685-03:00 TRACE 28242 --- [MottuGrid_Java] [main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'br.com.mottugrid_java.service.YardService.create' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-05-23T11:36:22.739-03:00  WARN 28242 --- [MottuGrid_Java] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-23T11:36:22.929-03:00  INFO 28242 --- [MottuGrid_Java] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-05-23T11:36:22.929-03:00  INFO 28242 --- [MottuGrid_Java] [main] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-05-23T11:36:22.929-03:00  INFO 28242 --- [MottuGrid_Java] [main] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2025-05-23T11:36:22.930-03:00  INFO 28242 --- [MottuGrid_Java] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-05-23T11:36:22.934-03:00  INFO 28242 --- [MottuGrid_Java] [main] b.c.m.MottugridJavaApplication           : Started MottugridJavaApplication in 13.675 seconds (process running for 13.922)
+2025-05-23T11:36:46.928-03:00  INFO 28242 --- [MottuGrid_Java] [http-nio-8080-exec-4] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 220 ms
+2025-05-23T11:37:41.913-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-5] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]
+2025-05-23T11:37:41.965-03:00 DEBUG 28242 --- [MottuGrid_Java] [http-nio-8080-exec-5] org.hibernate.SQL                        : 
+    select
+        y1_0.id,
+        y1_0.branch_id,
+        y1_0.name 
+    from
+        yards y1_0 
+    order by
+        y1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+2025-05-23T11:37:42.004-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-5] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]
+2025-05-23T11:37:42.021-03:00  WARN 28242 --- [MottuGrid_Java] [http-nio-8080-exec-5] ration$PageModule$WarningLoggingModifier : Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
+	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
+
+2025-05-23T11:37:42.795-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-6] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]
+2025-05-23T11:37:42.797-03:00 DEBUG 28242 --- [MottuGrid_Java] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
+    select
+        y1_0.id,
+        y1_0.branch_id,
+        y1_0.name 
+    from
+        yards y1_0 
+    order by
+        y1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+2025-05-23T11:37:42.816-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-6] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]
+2025-05-23T11:38:07.002-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-8] o.s.t.i.TransactionInterceptor           : Getting transaction for [br.com.mottugrid_java.service.MotorcycleService.create]
+2025-05-23T11:38:07.003-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-8] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.existsByPlate]: This method is not transactional.
+2025-05-23T11:38:07.013-03:00 DEBUG 28242 --- [MottuGrid_Java] [http-nio-8080-exec-8] org.hibernate.SQL                        : 
+    select
+        m1_0.id 
+    from
+        motorcycles m1_0 
+    where
+        m1_0.plate=? 
+    fetch
+        first ? rows only
+2025-05-23T11:38:07.033-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-8] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:38:07.037-03:00 DEBUG 28242 --- [MottuGrid_Java] [http-nio-8080-exec-8] org.hibernate.SQL                        : 
+    select
+        y1_0.id,
+        y1_0.branch_id,
+        y1_0.name 
+    from
+        yards y1_0 
+    where
+        y1_0.id=?
+2025-05-23T11:38:07.053-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-8] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:38:07.053-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-8] o.s.t.i.TransactionInterceptor           : Completing transaction for [br.com.mottugrid_java.service.MotorcycleService.create] after exception: jakarta.persistence.EntityNotFoundException: Yard não encontrada com id 37313032-3641-4637-3033-374134373646
+2025-05-23T11:38:08.995-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : Getting transaction for [br.com.mottugrid_java.service.MotorcycleService.create]
+2025-05-23T11:38:08.995-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.existsByPlate]: This method is not transactional.
+2025-05-23T11:38:08.996-03:00 DEBUG 28242 --- [MottuGrid_Java] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
+    select
+        m1_0.id 
+    from
+        motorcycles m1_0 
+    where
+        m1_0.plate=? 
+    fetch
+        first ? rows only
+2025-05-23T11:38:09.014-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:38:09.014-03:00 DEBUG 28242 --- [MottuGrid_Java] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
+    select
+        y1_0.id,
+        y1_0.branch_id,
+        y1_0.name 
+    from
+        yards y1_0 
+    where
+        y1_0.id=?
+2025-05-23T11:38:09.027-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:38:09.027-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : Completing transaction for [br.com.mottugrid_java.service.MotorcycleService.create] after exception: jakarta.persistence.EntityNotFoundException: Yard não encontrada com id 37313032-3641-4637-3033-374134373646
+2025-05-23T11:38:30.601-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-10] o.s.t.i.TransactionInterceptor           : Getting transaction for [br.com.mottugrid_java.service.MotorcycleService.create]
+2025-05-23T11:38:30.601-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-10] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.existsByPlate]: This method is not transactional.
+2025-05-23T11:38:30.602-03:00 DEBUG 28242 --- [MottuGrid_Java] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
+    select
+        m1_0.id 
+    from
+        motorcycles m1_0 
+    where
+        m1_0.plate=? 
+    fetch
+        first ? rows only
+2025-05-23T11:38:30.620-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-10] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:38:30.621-03:00 DEBUG 28242 --- [MottuGrid_Java] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
+    select
+        y1_0.id,
+        y1_0.branch_id,
+        y1_0.name 
+    from
+        yards y1_0 
+    where
+        y1_0.id=?
+2025-05-23T11:38:30.633-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-10] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:38:30.633-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-10] o.s.t.i.TransactionInterceptor           : Completing transaction for [br.com.mottugrid_java.service.MotorcycleService.create] after exception: jakarta.persistence.EntityNotFoundException: Yard não encontrada com id 44344446-3244-3435-3846-423134373531
+2025-05-23T11:38:32.273-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-1] o.s.t.i.TransactionInterceptor           : Getting transaction for [br.com.mottugrid_java.service.MotorcycleService.create]
+2025-05-23T11:38:32.273-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-1] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.existsByPlate]: This method is not transactional.
+2025-05-23T11:38:32.274-03:00 DEBUG 28242 --- [MottuGrid_Java] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
+    select
+        m1_0.id 
+    from
+        motorcycles m1_0 
+    where
+        m1_0.plate=? 
+    fetch
+        first ? rows only
+2025-05-23T11:38:32.292-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-1] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:38:32.293-03:00 DEBUG 28242 --- [MottuGrid_Java] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
+    select
+        y1_0.id,
+        y1_0.branch_id,
+        y1_0.name 
+    from
+        yards y1_0 
+    where
+        y1_0.id=?
+2025-05-23T11:38:32.305-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-1] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:38:32.305-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-1] o.s.t.i.TransactionInterceptor           : Completing transaction for [br.com.mottugrid_java.service.MotorcycleService.create] after exception: jakarta.persistence.EntityNotFoundException: Yard não encontrada com id 44344446-3244-3435-3846-423134373531
+2025-05-23T11:38:54.771-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-2] o.s.t.i.TransactionInterceptor           : Getting transaction for [br.com.mottugrid_java.service.YardService.create]
+2025-05-23T11:38:54.771-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-2] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:38:54.772-03:00 DEBUG 28242 --- [MottuGrid_Java] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
+    select
+        b1_0.id,
+        b1_0.city,
+        b1_0.name,
+        b1_0.phone,
+        b1_0.state 
+    from
+        branches b1_0 
+    where
+        b1_0.id=?
+2025-05-23T11:38:54.791-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-2] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:38:54.792-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-2] o.s.t.i.TransactionInterceptor           : Completing transaction for [br.com.mottugrid_java.service.YardService.create] after exception: jakarta.persistence.EntityNotFoundException: Branch não encontrada com id 3fa85f64-5717-4562-b3fc-2c963f66afa6
+2025-05-23T11:38:56.165-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-3] o.s.t.i.TransactionInterceptor           : Getting transaction for [br.com.mottugrid_java.service.YardService.create]
+2025-05-23T11:38:56.165-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-3] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:38:56.166-03:00 DEBUG 28242 --- [MottuGrid_Java] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
+    select
+        b1_0.id,
+        b1_0.city,
+        b1_0.name,
+        b1_0.phone,
+        b1_0.state 
+    from
+        branches b1_0 
+    where
+        b1_0.id=?
+2025-05-23T11:38:56.187-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-3] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:38:56.187-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-3] o.s.t.i.TransactionInterceptor           : Completing transaction for [br.com.mottugrid_java.service.YardService.create] after exception: jakarta.persistence.EntityNotFoundException: Branch não encontrada com id 3fa85f64-5717-4562-b3fc-2c963f66afa6
+2025-05-23T11:39:04.641-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-4] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]
+2025-05-23T11:39:04.642-03:00 DEBUG 28242 --- [MottuGrid_Java] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
+    select
+        b1_0.id,
+        b1_0.city,
+        b1_0.name,
+        b1_0.phone,
+        b1_0.state 
+    from
+        branches b1_0 
+    order by
+        b1_0.id 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+2025-05-23T11:39:04.666-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-4] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]
+2025-05-23T11:39:30.378-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-5] o.s.t.i.TransactionInterceptor           : Getting transaction for [br.com.mottugrid_java.service.YardService.create]
+2025-05-23T11:39:30.379-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-5] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:39:30.379-03:00 DEBUG 28242 --- [MottuGrid_Java] [http-nio-8080-exec-5] org.hibernate.SQL                        : 
+    select
+        b1_0.id,
+        b1_0.city,
+        b1_0.name,
+        b1_0.phone,
+        b1_0.state 
+    from
+        branches b1_0 
+    where
+        b1_0.id=?
+2025-05-23T11:39:30.398-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-5] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:39:30.399-03:00 DEBUG 28242 --- [MottuGrid_Java] [http-nio-8080-exec-5] org.hibernate.SQL                        : 
+    select
+        y1_0.branch_id,
+        y1_0.id,
+        y1_0.name 
+    from
+        yards y1_0 
+    where
+        y1_0.branch_id=?
+2025-05-23T11:39:30.421-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-5] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2025-05-23T11:39:30.431-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-5] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2025-05-23T11:39:30.431-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-5] o.s.t.i.TransactionInterceptor           : Completing transaction for [br.com.mottugrid_java.service.YardService.create]
+2025-05-23T11:39:30.448-03:00 DEBUG 28242 --- [MottuGrid_Java] [http-nio-8080-exec-5] org.hibernate.SQL                        : 
+    insert 
+    into
+        yards
+        (branch_id, name, id) 
+    values
+        (?, ?, ?)
+2025-05-23T11:39:32.410-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-6] o.s.t.i.TransactionInterceptor           : Getting transaction for [br.com.mottugrid_java.service.YardService.create]
+2025-05-23T11:39:32.410-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-6] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:39:32.410-03:00 DEBUG 28242 --- [MottuGrid_Java] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
+    select
+        b1_0.id,
+        b1_0.city,
+        b1_0.name,
+        b1_0.phone,
+        b1_0.state 
+    from
+        branches b1_0 
+    where
+        b1_0.id=?
+2025-05-23T11:39:32.430-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-6] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:39:32.430-03:00 DEBUG 28242 --- [MottuGrid_Java] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
+    select
+        y1_0.branch_id,
+        y1_0.id,
+        y1_0.name 
+    from
+        yards y1_0 
+    where
+        y1_0.branch_id=?
+2025-05-23T11:39:32.443-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-6] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2025-05-23T11:39:32.443-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-6] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2025-05-23T11:39:32.443-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-6] o.s.t.i.TransactionInterceptor           : Completing transaction for [br.com.mottugrid_java.service.YardService.create]
+2025-05-23T11:39:32.444-03:00 DEBUG 28242 --- [MottuGrid_Java] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
+    insert 
+    into
+        yards
+        (branch_id, name, id) 
+    values
+        (?, ?, ?)
+2025-05-23T11:39:51.931-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : Getting transaction for [br.com.mottugrid_java.service.MotorcycleService.create]
+2025-05-23T11:39:51.931-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.existsByPlate]: This method is not transactional.
+2025-05-23T11:39:51.932-03:00 DEBUG 28242 --- [MottuGrid_Java] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
+    select
+        m1_0.id 
+    from
+        motorcycles m1_0 
+    where
+        m1_0.plate=? 
+    fetch
+        first ? rows only
+2025-05-23T11:39:51.952-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:39:51.952-03:00 DEBUG 28242 --- [MottuGrid_Java] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
+    select
+        y1_0.id,
+        y1_0.branch_id,
+        y1_0.name 
+    from
+        yards y1_0 
+    where
+        y1_0.id=?
+2025-05-23T11:39:51.966-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:39:51.967-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2025-05-23T11:39:51.967-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2025-05-23T11:39:51.967-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : Completing transaction for [br.com.mottugrid_java.service.MotorcycleService.create]
+2025-05-23T11:39:51.970-03:00 DEBUG 28242 --- [MottuGrid_Java] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
+    insert 
+    into
+        motorcycles
+        (manufacturer, model, plate, yard_id, year, id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-05-23T11:39:53.482-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-8] o.s.t.i.TransactionInterceptor           : Getting transaction for [br.com.mottugrid_java.service.MotorcycleService.create]
+2025-05-23T11:39:53.482-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-8] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.existsByPlate]: This method is not transactional.
+2025-05-23T11:39:53.483-03:00 DEBUG 28242 --- [MottuGrid_Java] [http-nio-8080-exec-8] org.hibernate.SQL                        : 
+    select
+        m1_0.id 
+    from
+        motorcycles m1_0 
+    where
+        m1_0.plate=? 
+    fetch
+        first ? rows only
+2025-05-23T11:39:53.501-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-8] o.s.t.i.TransactionInterceptor           : Completing transaction for [br.com.mottugrid_java.service.MotorcycleService.create] after exception: java.lang.IllegalArgumentException: Já existe uma motocicleta com a placa abc234
+2025-05-23T11:40:03.056-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : Getting transaction for [br.com.mottugrid_java.service.MotorcycleService.create]
+2025-05-23T11:40:03.056-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.existsByPlate]: This method is not transactional.
+2025-05-23T11:40:03.057-03:00 DEBUG 28242 --- [MottuGrid_Java] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
+    select
+        m1_0.id 
+    from
+        motorcycles m1_0 
+    where
+        m1_0.plate=? 
+    fetch
+        first ? rows only
+2025-05-23T11:40:03.075-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:40:03.075-03:00 DEBUG 28242 --- [MottuGrid_Java] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
+    select
+        y1_0.id,
+        y1_0.branch_id,
+        y1_0.name 
+    from
+        yards y1_0 
+    where
+        y1_0.id=?
+2025-05-23T11:40:03.089-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:40:03.089-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2025-05-23T11:40:03.090-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2025-05-23T11:40:03.090-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : Completing transaction for [br.com.mottugrid_java.service.MotorcycleService.create]
+2025-05-23T11:40:03.090-03:00 DEBUG 28242 --- [MottuGrid_Java] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
+    insert 
+    into
+        motorcycles
+        (manufacturer, model, plate, yard_id, year, id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-05-23T11:40:03.793-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-10] o.s.t.i.TransactionInterceptor           : Getting transaction for [br.com.mottugrid_java.service.MotorcycleService.create]
+2025-05-23T11:40:03.793-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-10] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.existsByPlate]: This method is not transactional.
+2025-05-23T11:40:03.794-03:00 DEBUG 28242 --- [MottuGrid_Java] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
+    select
+        m1_0.id 
+    from
+        motorcycles m1_0 
+    where
+        m1_0.plate=? 
+    fetch
+        first ? rows only
+2025-05-23T11:40:03.813-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-10] o.s.t.i.TransactionInterceptor           : Completing transaction for [br.com.mottugrid_java.service.MotorcycleService.create] after exception: java.lang.IllegalArgumentException: Já existe uma motocicleta com a placa abc235
+2025-05-23T11:40:24.907-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-1] o.s.t.i.TransactionInterceptor           : Getting transaction for [br.com.mottugrid_java.service.MotorcycleService.create]
+2025-05-23T11:40:24.908-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-1] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.existsByPlate]: This method is not transactional.
+2025-05-23T11:40:24.908-03:00 DEBUG 28242 --- [MottuGrid_Java] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
+    select
+        m1_0.id 
+    from
+        motorcycles m1_0 
+    where
+        m1_0.plate=? 
+    fetch
+        first ? rows only
+2025-05-23T11:40:24.927-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-1] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:40:24.927-03:00 DEBUG 28242 --- [MottuGrid_Java] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
+    select
+        y1_0.id,
+        y1_0.branch_id,
+        y1_0.name 
+    from
+        yards y1_0 
+    where
+        y1_0.id=?
+2025-05-23T11:40:24.940-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-1] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2025-05-23T11:40:24.940-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-1] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2025-05-23T11:40:24.940-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-1] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2025-05-23T11:40:24.940-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-1] o.s.t.i.TransactionInterceptor           : Completing transaction for [br.com.mottugrid_java.service.MotorcycleService.create]
+2025-05-23T11:40:24.941-03:00 DEBUG 28242 --- [MottuGrid_Java] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
+    insert 
+    into
+        motorcycles
+        (manufacturer, model, plate, yard_id, year, id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-05-23T11:40:44.139-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-2] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]
+2025-05-23T11:40:44.140-03:00 DEBUG 28242 --- [MottuGrid_Java] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
+    select
+        m1_0.id,
+        m1_0.manufacturer,
+        m1_0.model,
+        m1_0.plate,
+        m1_0.yard_id,
+        m1_0.year 
+    from
+        motorcycles m1_0 
+    order by
+        m1_0.model 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+2025-05-23T11:40:44.171-03:00 TRACE 28242 --- [MottuGrid_Java] [http-nio-8080-exec-2] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]

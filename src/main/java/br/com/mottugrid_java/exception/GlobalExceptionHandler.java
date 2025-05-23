@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 import java.util.stream.Collectors;
-@ControllerAdvice
+
 @Hidden
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -27,7 +27,8 @@ public class GlobalExceptionHandler {
                 .stream()
                 .collect(Collectors.toMap(
                         err -> err.getField(),
-                        err -> err.getDefaultMessage()
+                        err -> err.getDefaultMessage(),
+                        (msg1, msg2) -> msg1 // evita erro de chave duplicada
                 ));
         return errors;
     }
@@ -39,7 +40,8 @@ public class GlobalExceptionHandler {
                 .stream()
                 .collect(Collectors.toMap(
                         cv -> cv.getPropertyPath().toString(),
-                        cv -> cv.getMessage()
+                        cv -> cv.getMessage(),
+                        (msg1, msg2) -> msg1 // evita erro de chave duplicada
                 ));
         return errors;
     }
@@ -47,6 +49,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Map<String, String> handleOthers(Exception ex) {
+        ex.printStackTrace(); // log para debug (pode substituir por Logger)
         return Map.of("error", "Erro interno: " + ex.getMessage());
     }
 }

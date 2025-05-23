@@ -6,6 +6,11 @@ import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
 
 public record YardRequestDTO(
-        @NotBlank String name,
-        @NotNull UUID branchId
+
+        @NotBlank(message = "O nome do pátio é obrigatório")
+        String name,
+
+        @NotNull(message = "O ID da filial é obrigatório")
+        UUID branchId
+
 ) {}

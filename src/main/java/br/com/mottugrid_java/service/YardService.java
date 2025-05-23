@@ -1,20 +1,22 @@
 package br.com.mottugrid_java.service;
 
 import br.com.mottugrid_java.domainmodel.Branch;
+import br.com.mottugrid_java.domainmodel.Yard;
 import br.com.mottugrid_java.dto.YardRequestDTO;
 import br.com.mottugrid_java.dto.YardResponseDTO;
-import br.com.mottugrid_java.domainmodel.Yard;
 import br.com.mottugrid_java.repository.BranchRepository;
 import br.com.mottugrid_java.repository.YardRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.*;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
 @Service
+@CacheConfig(cacheNames = {"yards"})
 public class YardService {
 
     @Autowired
@@ -24,17 +26,20 @@ public class YardService {
     private BranchRepository branchRepository;
 
     @Transactional
+    @CacheEvict(allEntries = true)
     public YardResponseDTO create(YardRequestDTO dto) {
         Yard yard = toEntity(dto);
         return toResponse(yardRepository.save(yard));
     }
 
+    @Cacheable(key = "#id")
     public YardResponseDTO getById(UUID id) {
         Yard yard = yardRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Yard não encontrada com id " + id));
         return toResponse(yard);
     }
 
+    @Cacheable(key = "#name != null ? #name + '-' + #pageable.pageNumber + '-' + #pageable.pageSize : 'all-' + #pageable.pageNumber + '-' + #pageable.pageSize")
     public Page<YardResponseDTO> list(String name, Pageable pageable) {
         Page<Yard> page = (name == null || name.isBlank())
                 ? yardRepository.findAll(pageable)
@@ -43,12 +48,15 @@ public class YardService {
     }
 
     @Transactional
+    @Caching(evict = {
+            @CacheEvict(key = "#id"),
+            @CacheEvict(allEntries = true)
+    })
     public YardResponseDTO update(UUID id, YardRequestDTO dto) {
         Yard yard = yardRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Yard não encontrada com id " + id));
 
         yard.setName(dto.name());
-
 
         if (dto.branchId() != null && !dto.branchId().equals(yard.getBranch().getId())) {
             Branch newBranch = branchRepository.findById(dto.branchId())
@@ -60,6 +68,10 @@ public class YardService {
     }
 
     @Transactional
+    @Caching(evict = {
+            @CacheEvict(key = "#id"),
+            @CacheEvict(allEntries = true)
+    })
     public void delete(UUID id) {
         if (!yardRepository.existsById(id)) {
             throw new EntityNotFoundException("Yard não encontrada com id " + id);
