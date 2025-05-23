@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "yards")
 @Getter
@@ -16,16 +18,13 @@ public class Yard {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private UUID id;
 
     @NotBlank(message = "O nome é obrigatório")
     private String name;
 
-    // Por enquanto comentado — vamos adicionar Branch e Address depois
-    // @ManyToOne(optional = false)
-    // private Branch branch;
-
-    // @OneToOne(cascade = CascadeType.ALL)
-    // private Address address;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "branch_id")
+    private Branch branch;
 }
 

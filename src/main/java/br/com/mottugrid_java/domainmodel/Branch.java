@@ -2,18 +2,24 @@ package br.com.mottugrid_java.domainmodel;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
+
 import java.util.UUID;
+import java.util.List;
+import java.util.ArrayList;
 
 @Entity
-@Getter
-@Setter
+@Table(name = "branches")
+@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class Branch {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
     @Column(nullable = false)
@@ -25,5 +31,9 @@ public class Branch {
     @Column(nullable = false)
     private String state;
 
+    @Column(nullable = false)
     private String phone;
+
+    @OneToMany(mappedBy = "branch", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Yard> yards = new ArrayList<>();
 }

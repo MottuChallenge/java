@@ -1,8 +1,10 @@
 package br.com.mottugrid_java.service;
 
+import br.com.mottugrid_java.domainmodel.Branch;
 import br.com.mottugrid_java.dto.YardRequestDTO;
 import br.com.mottugrid_java.dto.YardResponseDTO;
 import br.com.mottugrid_java.domainmodel.Yard;
+import br.com.mottugrid_java.repository.BranchRepository;
 import br.com.mottugrid_java.repository.YardRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ public class YardService {
 
     @Autowired
     private YardRepository yardRepository;
+    @Autowired
+    private BranchRepository branchRepository;
 
     public YardResponseDTO create(YardRequestDTO dto) {
         Yard yard = toEntity(dto);
@@ -51,12 +55,20 @@ public class YardService {
     }
 
     private Yard toEntity(YardRequestDTO dto) {
+        Branch branch = branchRepository.findById(dto.branchId())
+                .orElseThrow(() -> new EntityNotFoundException("Branch não encontrada com id " + dto.branchId()));
         return Yard.builder()
                 .name(dto.name())
+                .branch(branch)
                 .build();
     }
 
     private YardResponseDTO toResponse(Yard yard) {
-        return new YardResponseDTO(yard.getId(), yard.getName());
+        return new YardResponseDTO(
+                yard.getId(),
+                yard.getName(),
+                yard.getBranch() != null ? yard.getBranch().getId() : null
+        );
     }
+
 }

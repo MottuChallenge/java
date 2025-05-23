@@ -1,8 +1,9 @@
 package br.com.mottugrid_java.dto;
 
+import java.util.UUID;
 
 public record YardResponseDTO(
-        Long id,
-        String name
+        UUID id,
+        String name,
+        UUID branchId
 ) {}
-
