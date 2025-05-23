@@ -60,11 +60,6 @@ No Swagger, você pode explorar todos os recursos da API, fazer requisições e 
 
 Este projeto foi desenvolvido para gerenciar entidades relacionadas a pátios e motocicletas, utilizando Spring Boot, JPA, e banco de dados Oracle.
 
-## Desenvolvedores
-
-- Pedro Henrique dos Santos - RM559064  
-- Thiago Thomaz Sales Conceição - RM557992  
-- Vinícius de Oliveira Coutinho - RM556182
 
 
 
