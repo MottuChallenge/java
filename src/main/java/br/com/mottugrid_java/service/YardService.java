@@ -7,24 +7,29 @@ import br.com.mottugrid_java.domainmodel.Yard;
 import br.com.mottugrid_java.repository.BranchRepository;
 import br.com.mottugrid_java.repository.YardRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 @Service
 public class YardService {
 
     @Autowired
     private YardRepository yardRepository;
+
     @Autowired
     private BranchRepository branchRepository;
 
+    @Transactional
     public YardResponseDTO create(YardRequestDTO dto) {
         Yard yard = toEntity(dto);
         return toResponse(yardRepository.save(yard));
     }
 
-    public YardResponseDTO getById(Long id) {
+    public YardResponseDTO getById(UUID id) {
         Yard yard = yardRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Yard não encontrada com id " + id));
         return toResponse(yard);
@@ -37,17 +42,25 @@ public class YardService {
         return page.map(this::toResponse);
     }
 
-    public YardResponseDTO update(Long id, YardRequestDTO dto) {
+    @Transactional
+    public YardResponseDTO update(UUID id, YardRequestDTO dto) {
         Yard yard = yardRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Yard não encontrada com id " + id));
 
         yard.setName(dto.name());
-        // futuros campos: address, branch...
+
+
+        if (dto.branchId() != null && !dto.branchId().equals(yard.getBranch().getId())) {
+            Branch newBranch = branchRepository.findById(dto.branchId())
+                    .orElseThrow(() -> new EntityNotFoundException("Branch não encontrada com id " + dto.branchId()));
+            yard.setBranch(newBranch);
+        }
 
         return toResponse(yardRepository.save(yard));
     }
 
-    public void delete(Long id) {
+    @Transactional
+    public void delete(UUID id) {
         if (!yardRepository.existsById(id)) {
             throw new EntityNotFoundException("Yard não encontrada com id " + id);
         }
@@ -57,10 +70,13 @@ public class YardService {
     private Yard toEntity(YardRequestDTO dto) {
         Branch branch = branchRepository.findById(dto.branchId())
                 .orElseThrow(() -> new EntityNotFoundException("Branch não encontrada com id " + dto.branchId()));
-        return Yard.builder()
+
+        Yard yard = Yard.builder()
                 .name(dto.name())
-                .branch(branch)
                 .build();
+
+        yard.setBranch(branch);
+        return yard;
     }
 
     private YardResponseDTO toResponse(Yard yard) {
@@ -70,5 +86,4 @@ public class YardService {
                 yard.getBranch() != null ? yard.getBranch().getId() : null
         );
     }
-
 }

@@ -1,9 +1,9 @@
 package br.com.mottugrid_java.domainmodel;
 
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.UUID;
 
@@ -17,14 +17,28 @@ import java.util.UUID;
 public class Yard {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(name = "id", updatable = false, nullable = false, columnDefinition = "VARCHAR2(36)")
     private UUID id;
 
     @NotBlank(message = "O nome é obrigatório")
+    @Column(nullable = false)
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "branch_id")
+    @JoinColumn(name = "branch_id", nullable = false)
     private Branch branch;
-}
 
+    public void setBranch(Branch branch) {
+        // Remove de branch antiga, se existir
+        if (this.branch != null) {
+            this.branch.getYards().remove(this);
+        }
+        this.branch = branch;
+        // Adiciona na nova branch, se não estiver lá
+        if (branch != null && !branch.getYards().contains(this)) {
+            branch.getYards().add(this);
+        }
+    }
+}

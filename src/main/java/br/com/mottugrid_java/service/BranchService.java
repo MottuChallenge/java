@@ -5,9 +5,11 @@ import br.com.mottugrid_java.dto.BranchRequestDTO;
 import br.com.mottugrid_java.dto.BranchResponseDTO;
 import br.com.mottugrid_java.repository.BranchRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
+
 
 import java.util.UUID;
 
@@ -16,12 +18,13 @@ public class BranchService {
 
     @Autowired
     private BranchRepository branchRepository;
-
+    @Transactional
     // CREATE
     public BranchResponseDTO create(BranchRequestDTO dto) {
         Branch branch = toEntity(dto);
         return toResponse(branchRepository.save(branch));
     }
+
 
     // READ (by ID)
     public BranchResponseDTO getById(UUID id) {
@@ -38,7 +41,7 @@ public class BranchService {
 
         return page.map(this::toResponse);
     }
-
+    @Transactional
     // UPDATE
     public BranchResponseDTO update(UUID id, BranchRequestDTO dto) {
         Branch branch = branchRepository.findById(id)
@@ -51,7 +54,7 @@ public class BranchService {
 
         return toResponse(branchRepository.save(branch));
     }
-
+    @Transactional
     // DELETE
     public void delete(UUID id) {
         if (!branchRepository.existsById(id)) {
@@ -59,6 +62,7 @@ public class BranchService {
         }
         branchRepository.deleteById(id);
     }
+
 
     // Converte DTO para entidade
     private Branch toEntity(BranchRequestDTO dto) {

@@ -3,6 +3,7 @@ package br.com.mottugrid_java.controller;
 import br.com.mottugrid_java.dto.BranchRequestDTO;
 import br.com.mottugrid_java.dto.BranchResponseDTO;
 import br.com.mottugrid_java.service.BranchService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
@@ -13,6 +14,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/branches")
+@Tag(name = "Branches", description = "Operações relacionadas às filiais")
 public class BranchController {
 
     @Autowired

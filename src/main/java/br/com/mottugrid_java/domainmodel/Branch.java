@@ -35,5 +35,18 @@ public class Branch {
     private String phone;
 
     @OneToMany(mappedBy = "branch", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Setter(AccessLevel.NONE)
     private List<Yard> yards = new ArrayList<>();
+
+
+    public void addYard(Yard yard) {
+        yards.add(yard);
+        yard.setBranch(this);
+    }
+
+
+    public void removeYard(Yard yard) {
+        yards.remove(yard);
+        yard.setBranch(null);
+    }
 }
