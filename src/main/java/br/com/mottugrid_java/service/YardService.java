@@ -39,13 +39,14 @@ public class YardService {
         return toResponse(yard);
     }
 
-    @Cacheable(key = "#name != null ? #name + '-' + #pageable.pageNumber + '-' + #pageable.pageSize : 'all-' + #pageable.pageNumber + '-' + #pageable.pageSize")
+    @Cacheable(key = "#name != null && !#name.isBlank() ? #name + '-' + #pageable.pageNumber + '-' + #pageable.pageSize + '-' + #pageable.sort.toString() : 'all-' + #pageable.pageNumber + '-' + #pageable.pageSize + '-' + #pageable.sort.toString()")
     public Page<YardResponseDTO> list(String name, Pageable pageable) {
         Page<Yard> page = (name == null || name.isBlank())
                 ? yardRepository.findAll(pageable)
                 : yardRepository.findByNameContainingIgnoreCase(name, pageable);
         return page.map(this::toResponse);
     }
+
 
     @Transactional
     @Caching(evict = {
