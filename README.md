@@ -32,14 +32,14 @@ Este projeto é uma API REST desenvolvida em Java com Spring Boot para gerenciam
 3. Configure as credenciais e a URL do banco no arquivo `application.properties` ou `application.yml`.  
    Exemplo de configuração no `application.properties`:
 
-spring.datasource.url=jdbc:oracle:thin:@localhost:1521:XE
+```properties
+spring.datasource.url=url_do_seu_banco
 spring.datasource.username=seu_usuario
 spring.datasource.password=sua_senha
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.format_sql=true
-
-
+```
 
 4. Compile e rode a aplicação com Maven ou Gradle:  
 ```bash```
