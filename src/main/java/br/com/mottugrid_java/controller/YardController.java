@@ -9,13 +9,15 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/yards")
-
 @Tag(name = "Yards", description = "Operações relacionadas aos pátios")
 public class YardController {
 
@@ -24,7 +26,7 @@ public class YardController {
 
     @Operation(summary = "Lista todos os yards com paginação, filtro opcional por nome e ordenação")
     @GetMapping
-    public Page<YardResponseDTO> list(
+    public ResponseEntity<Page<YardResponseDTO>> list(
             @RequestParam(required = false) String name,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
@@ -44,32 +46,36 @@ public class YardController {
         Sort sortOrder = Sort.by(direction, sortField);
         Pageable pageable = PageRequest.of(page, size, sortOrder);
 
-        return yardService.list(name, pageable);
+        return ResponseEntity.ok(yardService.list(name, pageable));
     }
 
     @Operation(summary = "Busca um yard pelo ID")
     @GetMapping("/{id}")
-    public YardResponseDTO getById(@PathVariable UUID id) {
-        return yardService.getById(id);
+    public ResponseEntity<YardResponseDTO> getById(@PathVariable UUID id) {
+
+        return ResponseEntity.ok(yardService.getById(id));
     }
 
     @Operation(summary = "Cria um novo yard")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public YardResponseDTO create(@RequestBody @Valid YardRequestDTO dto) {
-        return yardService.create(dto);
+    public ResponseEntity<YardResponseDTO> create(@RequestBody @Valid YardRequestDTO dto, UriComponentsBuilder uriComponentsBuilder) {
+        YardResponseDTO yardResponseDTO = yardService.create(dto);
+        URI uri = uriComponentsBuilder.path("/api/yards/{id}").buildAndExpand(yardResponseDTO.id()).toUri();
+        return ResponseEntity.created(uri).body(yardResponseDTO);
     }
 
     @Operation(summary = "Atualiza um yard existente pelo ID")
     @PutMapping("/{id}")
-    public YardResponseDTO update(@PathVariable UUID id, @RequestBody @Valid YardRequestDTO dto) {
-        return yardService.update(id, dto);
+    public ResponseEntity<YardResponseDTO> update(@PathVariable UUID id, @RequestBody @Valid YardRequestDTO dto) {
+        return ResponseEntity.ok(yardService.update(id, dto));
     }
 
     @Operation(summary = "Remove um yard pelo ID")
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable UUID id) {
+    public ResponseEntity<Void> delete(@PathVariable UUID id) {
         yardService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

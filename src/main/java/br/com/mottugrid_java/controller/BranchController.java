@@ -8,8 +8,11 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.UUID;
 
 @RestController
@@ -21,7 +24,7 @@ public class BranchController {
     private BranchService branchService;
 
     @GetMapping
-    public Page<BranchResponseDTO> list(
+    public ResponseEntity<Page<BranchResponseDTO>> list(
             @RequestParam(required = false) String name,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
@@ -30,28 +33,31 @@ public class BranchController {
         Sort.Direction direction = Sort.Direction.fromString(sort[1]);
         Sort sortOrder = Sort.by(direction, sort[0]);
         Pageable pageable = PageRequest.of(page, size, sortOrder);
-        return branchService.list(name, pageable);
+        return ResponseEntity.ok(branchService.list(name, pageable));
     }
 
     @GetMapping("/{id}")
-    public BranchResponseDTO getById(@PathVariable UUID id) {
-        return branchService.getById(id);
+    public ResponseEntity<BranchResponseDTO> getById(@PathVariable UUID id) {
+        return ResponseEntity.ok(branchService.getById(id));
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public BranchResponseDTO create(@RequestBody @Valid BranchRequestDTO dto) {
-        return branchService.create(dto);
+    public ResponseEntity<BranchResponseDTO> create(@RequestBody @Valid BranchRequestDTO dto, UriComponentsBuilder uriComponentsBuilder) {
+        BranchResponseDTO branchResponseDTO = branchService.create(dto);
+        URI uri = uriComponentsBuilder.path("/api/branches/{id}").buildAndExpand(branchResponseDTO.id()).toUri();
+        return ResponseEntity.created(uri).body(branchResponseDTO);
     }
 
     @PutMapping("/{id}")
-    public BranchResponseDTO update(@PathVariable UUID id, @RequestBody @Valid BranchRequestDTO dto) {
-        return branchService.update(id, dto);
+    public ResponseEntity<BranchResponseDTO> update(@PathVariable UUID id, @RequestBody @Valid BranchRequestDTO dto) {
+        return ResponseEntity.ok(branchService.update(id, dto));
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable UUID id) {
+    public ResponseEntity<Void> delete(@PathVariable UUID id) {
         branchService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
