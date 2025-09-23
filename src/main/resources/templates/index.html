@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head('Dashboard')"></head>
+<body>
+<nav>
+    <a th:href="@{/branches}">Filiais</a> |
+    <a th:href="@{/motorcycles}">Motos</a> |
+    <a th:href="@{/logout}">Logout</a>
+</nav>
+
+<h1>Dashboard</h1>
+<p>Resumo simples — implemente queries para estatísticas.</p>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

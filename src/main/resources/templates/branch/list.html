@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head('Filiais')"></head>
+<body>
+<nav>
+    <a th:href="@{/}">Dashboard</a> |
+    <a th:href="@{/branches/new}">Nova Filial</a> |
+    <a th:href="@{/logout}">Logout</a>
+</nav>
+
+<h2>Filiais</h2>
+<table>
+    <thead><tr><th>Nome</th><th>Endereço</th><th>Ações</th></tr></thead>
+    <tbody>
+    <tr th:each="b : ${branches}">
+        <td th:text="${b.name}">Nome</td>
+        <td th:text="${b.address}">Endereço</td>
+        <td>
+            <a th:href="@{|/branches/edit/${b.id}|}">Editar</a> |
+            <a th:href="@{|/branches/delete/${b.id}|}">Excluir</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

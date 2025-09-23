@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head('Form Filial')"></head>
+<body>
+<a th:href="@{/branches}">Voltar</a>
+<h2 th:text="${branch.id}==null ? 'Nova Filial' : 'Editar Filial'"></h2>
+
+<form th:action="@{/branches/save}" th:object="${branch}" method="post">
+    <input type="hidden" th:field="*{id}" />
+    <label>Nome: <input type="text" th:field="*{name}" /></label><br/>
+    <label>Endereço: <input type="text" th:field="*{address}" /></label><br/>
+    <button type="submit">Salvar</button>
+</form>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
