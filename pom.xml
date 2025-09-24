@@ -105,6 +105,16 @@
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>9.22.3</version>
+				<configuration>
+					<url>jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL</url>
+					<user>rm556182</user>
+					<password>101003</password>
+					<cleanDisabled>false</cleanDisabled> </configuration>
+			</plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
