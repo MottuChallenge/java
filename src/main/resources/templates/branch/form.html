@@ -1,17 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: head('Form Filial')"></head>
+<head th:replace="~{fragments/header :: head(${pageTitle})}"></head>
 <body>
-<a th:href="@{/branches}">Voltar</a>
-<h2 th:text="${branch.id}==null ? 'Nova Filial' : 'Editar Filial'"></h2>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
 
-<form th:action="@{/branches/save}" th:object="${branch}" method="post">
-    <input type="hidden" th:field="*{id}" />
-    <label>Nome: <input type="text" th:field="*{name}" /></label><br/>
-    <label>Endereço: <input type="text" th:field="*{address}" /></label><br/>
-    <button type="submit">Salvar</button>
-</form>
+<div class="container">
+    <h2 th:text="${pageTitle}">Formulário de Filial</h2>
 
-<div th:replace="fragments/footer :: footer"></div>
+    <form th:action="@{/branches/save}" th:object="${branch}" method="post">
+        <input type="hidden" name="id" th:value="${branchId}" />
+
+        <div class="mb-3">
+            <label for="name" class="form-label">Nome:</label>
+            <input type="text" id="name" th:field="*{name}" class="form-control" />
+            <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+        </div>
+        <div class="mb-3">
+            <label for="city" class="form-label">Cidade:</label>
+            <input type="text" id="city" th:field="*{city}" class="form-control" />
+            <div class="text-danger" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></div>
+        </div>
+        <div class="mb-3">
+            <label for="state" class="form-label">Estado (UF):</label>
+            <input type="text" id="state" th:field="*{state}" class="form-control" maxlength="2" />
+            <div class="text-danger" th:if="${#fields.hasErrors('state')}" th:errors="*{state}"></div>
+        </div>
+        <div class="mb-3">
+            <label for="phone" class="form-label">Telefone:</label>
+            <input type="text" id="phone" th:field="*{phone}" class="form-control" />
+            <div class="text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></div>
+        </div>
+
+        <button type="submit" class="btn btn-success">Salvar</button>
+        <a th:href="@{/branches}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>

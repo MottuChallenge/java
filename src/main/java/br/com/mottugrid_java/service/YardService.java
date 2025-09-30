@@ -39,7 +39,8 @@ public class YardService {
         return toResponse(yard);
     }
 
-    @Cacheable(key = "#name != null && !#name.isBlank() ? #name + '-' + #pageable.pageNumber + '-' + #pageable.pageSize + '-' + #pageable.sort.toString() : 'all-' + #pageable.pageNumber + '-' + #pageable.pageSize + '-' + #pageable.sort.toString()")
+
+    @Cacheable(key = "T(java.util.Objects).toString(#name, 'all') + '-' + (#pageable.isPaged() ? #pageable.getPageNumber() + '-' + #pageable.getPageSize() : 'unpaged') + '-' + #pageable.getSort()")
     public Page<YardResponseDTO> list(String name, Pageable pageable) {
         Page<Yard> page = (name == null || name.isBlank())
                 ? yardRepository.findAll(pageable)

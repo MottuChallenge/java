@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: head(${pageTitle})}"></head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="container">
+    <h2 th:text="${pageTitle}">Formulário de Motocicleta</h2>
+
+    <form th:action="@{/motorcycles/save}" th:object="${motorcycle}" method="post">
+        <input type="hidden" name="id" th:value="${motorcycleId}" />
+
+        <div class="mb-3">
+            <label for="model" class="form-label">Modelo:</label>
+            <input type="text" id="model" th:field="*{model}" class="form-control" />
+            <div class="text-danger" th:if="${#fields.hasErrors('model')}" th:errors="*{model}"></div>
+        </div>
+
+        <div class="mb-3">
+            <label for="plate" class="form-label">Placa:</label>
+            <input type="text" id="plate" th:field="*{plate}" class="form-control" />
+            <div class="text-danger" th:if="${#fields.hasErrors('plate')}" th:errors="*{plate}"></div>
+        </div>
+
+        <div class="mb-3">
+            <label for="manufacturer" class="form-label">Fabricante:</label>
+            <input type="text" id="manufacturer" th:field="*{manufacturer}" class="form-control" />
+            <div class="text-danger" th:if="${#fields.hasErrors('manufacturer')}" th:errors="*{manufacturer}"></div>
+        </div>
+
+        <div class="mb-3">
+            <label for="year" class="form-label">Ano:</label>
+            <input type="number" id="year" th:field="*{year}" class="form-control" />
+            <div class="text-danger" th:if="${#fields.hasErrors('year')}" th:errors="*{year}"></div>
+        </div>
+
+        <div class="mb-3">
+            <label for="yardId" class="form-label">Pátio:</label>
+            <select id="yardId" th:field="*{yardId}" class="form-select">
+                <option value="">Selecione um Pátio</option>
+                <option th:each="yard : ${yards}"
+                        th:value="${yard.id()}"
+                        th:text="${yard.name()}"></option>
+            </select>
+            <div class="text-danger" th:if="${#fields.hasErrors('yardId')}" th:errors="*{yardId}"></div>
+        </div>
+
+        <button type="submit" class="btn btn-success">Salvar</button>
+        <a th:href="@{/motorcycles}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>
