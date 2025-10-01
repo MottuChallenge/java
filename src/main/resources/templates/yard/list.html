@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: head('Pátios')}"></head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="container">
+    <h2>Gerenciamento de Pátios</h2>
+    <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
+    <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+    <a th:href="@{/yards/new}" class="btn btn-primary mb-3">Novo Pátio</a>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="yard : ${yards}">
+            <td th:text="${yard.name()}">Nome do Pátio</td>
+            <td>
+                <a th:href="@{|/yards/edit/${yard.id()}|}" class="btn btn-sm btn-warning">Editar</a>
+                <a th:href="@{|/yards/delete/${yard.id()}|}" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

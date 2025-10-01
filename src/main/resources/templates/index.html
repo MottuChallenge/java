@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: head('Dashboard')}"></head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="container">
+    <h1>Dashboard</h1>
+    <p>Bem-vindo ao sistema de gerenciamento MottuGrid.</p>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Gerenciar Filiais</h5>
+                    <p class="card-text">Adicione, edite e visualize as filiais.</p>
+                    <a th:href="@{/branches}" class="btn btn-primary">Ir para Filiais</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Gerenciar Pátios</h5>
+                    <p class="card-text">Adicione, edite e visualize os pátios.</p>
+                    <a th:href="@{/yards}" class="btn btn-primary">Ir para Pátios</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Gerenciar Motocicletas</h5>
+                    <p class="card-text">Adicione, edite e visualize as motocicletas.</p>
+                    <a th:href="@{/motorcycles}" class="btn btn-primary">Ir para Motocicletas</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

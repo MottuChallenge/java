@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: head('Filiais')}"></head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="container">
+    <h2>Gerenciamento de Filiais</h2>
+    <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
+    <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+    <a th:href="@{/branches/new}" class="btn btn-primary mb-3">Nova Filial</a>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Cidade</th>
+            <th>Estado</th>
+            <th>Telefone</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="branch : ${branches}">
+            <td th:text="${branch.name()}">Sede São Paulo</td>
+            <td th:text="${branch.city()}">São Paulo</td>
+            <td th:text="${branch.state()}">SP</td>
+            <td th:text="${branch.phone()}">11999998888</td>
+            <td>
+                <a th:href="@{|/branches/edit/${branch.id()}|}" class="btn btn-sm btn-warning">Editar</a>
+                <a th:href="@{|/branches/delete/${branch.id()}|}" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

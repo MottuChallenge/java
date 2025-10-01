@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: head('Login')}"></head>
+<body class="bg-light">
+
+<div class="container">
+    <div class="row justify-content-center" style="margin-top: 100px;">
+        <div class="col-md-6 col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">MottuGrid Login</h2>
+
+                    <!-- Mensagem de erro, se houver -->
+                    <div th:if="${param.error}" class="alert alert-danger">
+                        Usuário ou senha inválidos.
+                    </div>
+
+                    <!-- Mensagem de logout, se houver -->
+                    <div th:if="${param.logout}" class="alert alert-success">
+                        Você foi desconectado.
+                    </div>
+
+                    <form th:action="@{/login}" method="post">
+                        <!-- CAMPO OCULTO DO TOKEN CSRF (ESSA É A CORREÇÃO PRINCIPAL) -->
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Usuário:</label>
+                            <input type="text" id="username" name="username" class="form-control" required autofocus />
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Senha:</label>
+                            <input type="password" id="password" name="password" class="form-control" required />
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Entrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>
+

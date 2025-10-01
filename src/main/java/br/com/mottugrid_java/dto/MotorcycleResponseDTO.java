@@ -8,5 +8,7 @@ public record MotorcycleResponseDTO(
         String plate,
         String manufacturer,
         Integer year,
-        UUID yardId
+        UUID yardId,
+        String yardName
 ) {}
+

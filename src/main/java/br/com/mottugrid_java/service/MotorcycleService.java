@@ -7,10 +7,10 @@ import br.com.mottugrid_java.dto.MotorcycleResponseDTO;
 import br.com.mottugrid_java.repository.MotorcycleRepository;
 import br.com.mottugrid_java.repository.YardRepository;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional; // Importe esta classe
 
 import java.util.UUID;
 
@@ -44,12 +44,14 @@ public class MotorcycleService {
         return toResponse(motorcycle);
     }
 
+    @Transactional(readOnly = true) // Adicionado para manter a sessão aberta para o getById
     public MotorcycleResponseDTO getById(UUID id) {
         Motorcycle motorcycle = motorcycleRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Motorcycle não encontrada com id " + id));
         return toResponse(motorcycle);
     }
 
+    @Transactional(readOnly = true) // Adicionado para manter a sessão aberta durante a conversão
     public Page<MotorcycleResponseDTO> list(String model, Pageable pageable) {
         Page<Motorcycle> page = (model == null || model.isBlank())
                 ? motorcycleRepository.findAll(pageable)
@@ -84,15 +86,31 @@ public class MotorcycleService {
         }
         motorcycleRepository.deleteById(id);
     }
+    @Transactional
+    public void move(UUID motorcycleId, UUID newYardId) {
+        Motorcycle motorcycle = motorcycleRepository.findById(motorcycleId)
+                .orElseThrow(() -> new EntityNotFoundException("Motocicleta não encontrada com id " + motorcycleId));
+
+        Yard newYard = yardRepository.findById(newYardId)
+                .orElseThrow(() -> new EntityNotFoundException("Pátio de destino não encontrado com id " + newYardId));
+
+        motorcycle.setYard(newYard);
+        motorcycleRepository.save(motorcycle);
+    }
 
     private MotorcycleResponseDTO toResponse(Motorcycle motorcycle) {
+        String yardName = (motorcycle.getYard() != null) ? motorcycle.getYard().getName() : "N/A";
+        UUID yardId = (motorcycle.getYard() != null) ? motorcycle.getYard().getId() : null;
+
         return new MotorcycleResponseDTO(
                 motorcycle.getId(),
                 motorcycle.getModel(),
                 motorcycle.getPlate(),
                 motorcycle.getManufacturer(),
                 motorcycle.getYear(),
-                motorcycle.getYard() != null ? motorcycle.getYard().getId() : null
+                yardId,
+                yardName
         );
     }
 }
+

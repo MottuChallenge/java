@@ -1,64 +1,202 @@
-## Projeto MottuGrid Java
+# MottuGrid Java
 
-## Descrição do Projeto
+## 📋 Descrição do Projeto
 
-Este projeto é uma API REST desenvolvida em Java com Spring Boot para gerenciamento de pátios (Yards), filiais (Branches) e motocicletas (Motorcycles). Ele oferece funcionalidades de CRUD completo para as entidades, com busca, paginação, validação, tratamento de erros e integração com banco de dados Oracle.
+O **MottuGrid Java** é uma aplicação completa desenvolvida em Java com Spring Boot para o gerenciamento inteligente de motocicletas em pátios distribuídos por filiais. O sistema oferece uma API REST robusta com interface web integrada, proporcionando controle total sobre o ciclo de vida das motocicletas desde o cadastro até a movimentação entre pátios.
 
-## Alunos
+### Funcionalidades Principais
 
-- Pedro Henrique dos Santos - RM559064  
-- Thiago Thomaz Sales Conceição - RM557992  
-- Vinícius de Oliveira Coutinho - RM556182  
+- 🏢 **Gerenciamento de Filiais**: Cadastro e controle de filiais por cidade/estado
+- 🏭 **Administração de Pátios**: Gestão de pátios vinculados às filiais
+- 🏍️ **Controle de Motocicletas**: CRUD completo com rastreamento de localização
+- 🔄 **Movimentação de Veículos**: Sistema de transferência entre pátios
+- 🔐 **Sistema de Autenticação**: Login seguro com Spring Security
+- 📊 **Interface Web**: Páginas interativas com Thymeleaf
+- 📖 **Documentação API**: Swagger/OpenAPI integrado
 
-## Tecnologias Utilizadas
+## 👥 Equipe de Desenvolvimento
 
-- Java 17+  
-- Spring Boot  
-- Spring Data JPA  
-- Hibernate  
-- Oracle Database  
-- Swagger (OpenAPI) para documentação da API  
+| Nome | RM | GitHub |
+|------|-------|--------|
+| Pedro Henrique dos Santos | RM559064 | - |
+| Thiago Thomaz Sales Conceição | RM557992 | - |
+| Vinícius de Oliveira Coutinho | RM556182 | - |
 
-## Como Executar
+## 🛠️ Tecnologias Utilizadas
 
-1. Certifique-se de que o Oracle Database está instalado e configurado, com o schema necessário criado.  
-2. Clone este repositório:  
+### Backend
+- **Java 17+** - Linguagem de programação
+- **Spring Boot 3.2.5** - Framework principal
+- **Spring Data JPA** - Persistência de dados
+- **Spring Security** - Autenticação e autorização
+- **Spring Cache** - Cache de dados
+- **Hibernate** - ORM
+- **Flyway** - Versionamento de banco
+
+### Frontend
+- **Thymeleaf** - Template engine
+- **HTML5/CSS3** - Interface web
+- **Bootstrap** - Framework CSS (implícito)
+
+### Banco de Dados
+- **Oracle Database** - Banco principal
+- **HikariCP** - Pool de conexões
+
+### Documentação e Testes
+- **Swagger/OpenAPI 3** - Documentação da API
+- **JUnit 5** - Testes unitários
+- **Spring Boot Test** - Testes de integração
+
+### Ferramentas
+- **Maven** - Gerenciamento de dependências
+- **Lombok** - Redução de boilerplate
+- **Maven Wrapper** - Execução sem instalação do Maven
+
+## 🗄️ Arquitetura do Banco de Dados
+
+```sql
+┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│  branches   │    │    yards    │    │ motorcycles │
+├─────────────┤    ├─────────────┤    ├─────────────┤
+│ id (PK)     │◄──┤ branch_id   │◄──┤ yard_id     │
+│ name        │    │ id (PK)     │    │ id (PK)     │
+│ city        │    │ name        │    │ model       │
+│ state       │    └─────────────┘    │ plate       │
+│ phone       │                       │ manufacturer│
+└─────────────┘                       │ year        │
+                                      └─────────────┘
+```
+
+## 🚀 Como Executar
+
+### Pré-requisitos
+- Java 17 ou superior
+- Acesso ao Oracle Database (FIAP)
+- Git
+
+### Passos para Execução
+
+1. **Clone o repositório**
    ```bash
    git clone https://github.com/MottuChallenge/java.git
    cd java
+   ```
+
+2. **Configure o banco de dados**
    
-## Como Executar
+   As configurações já estão definidas em `application.properties` para o ambiente FIAP:
+   ```properties
+   spring.datasource.url=jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL
+   spring.datasource.username=rm556182
+   spring.datasource.password=101003
+   ```
 
-3. Configure as credenciais e a URL do banco no arquivo `application.properties` ou `application.yml`.  
-   Exemplo de configuração no `application.properties`:
+3. **Execute as migrações do banco**
+   ```bash
+   ./mvnw flyway:clean flyway:migrate
+   ```
 
-```properties
-spring.datasource.url=url_do_seu_banco
-spring.datasource.username=seu_usuario
-spring.datasource.password=sua_senha
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-spring.jpa.properties.hibernate.format_sql=true
+4. **Inicie a aplicação**
+   ```bash
+   ./mvnw spring-boot:run
+   ```
+
+5. **Acesse a aplicação**
+   - **Interface Web**: http://localhost:8080
+   - **API Documentation**: http://localhost:8080/swagger-ui/index.html
+   - **Endpoints da API**: http://localhost:8080/api/
+
+## 📡 Endpoints da API
+
+### Filiais (Branches)
+- `GET /api/branches` - Listar todas as filiais
+- `GET /api/branches/{id}` - Buscar filial por ID
+- `POST /api/branches` - Criar nova filial
+- `PUT /api/branches/{id}` - Atualizar filial
+- `DELETE /api/branches/{id}` - Excluir filial
+
+### Pátios (Yards)
+- `GET /api/yards` - Listar todos os pátios
+- `GET /api/yards/{id}` - Buscar pátio por ID
+- `POST /api/yards` - Criar novo pátio
+- `PUT /api/yards/{id}` - Atualizar pátio
+- `DELETE /api/yards/{id}` - Excluir pátio
+
+### Motocicletas (Motorcycles)
+- `GET /api/motorcycles` - Listar todas as motocicletas
+- `GET /api/motorcycles/{id}` - Buscar motocicleta por ID
+- `POST /api/motorcycles` - Cadastrar nova motocicleta
+- `PUT /api/motorcycles/{id}` - Atualizar motocicleta
+- `DELETE /api/motorcycles/{id}` - Excluir motocicleta
+- `PATCH /api/motorcycles/{id}/move` - Mover motocicleta entre pátios
+
+## 🌐 Interface Web
+
+A aplicação possui uma interface web completa acessível em `http://localhost:8080` com:
+
+- **Dashboard Principal** - Visão geral do sistema
+- **Gestão de Filiais** - CRUD completo via formulários
+- **Gestão de Pátios** - Administração de pátios por filial
+- **Gestão de Motocicletas** - Controle completo do estoque
+- **Sistema de Login** - Autenticação segura
+
+## 📖 Documentação da API (Swagger)
+
+Acesse `http://localhost:8080/swagger-ui/index.html` para:
+
+- 📋 Visualizar todos os endpoints disponíveis
+- 🧪 Testar requisições diretamente no navegador
+- 📝 Ver exemplos de request/response
+- 🔍 Explorar modelos de dados
+
+## 🗂️ Estrutura do Projeto
+
+```
+src/main/java/br/com/mottugrid_java/
+├── controller/          # Controllers REST e Web
+├── domainmodel/         # Entidades JPA
+├── dto/                 # Data Transfer Objects
+├── infrastructure/      # Configurações de infraestrutura
+├── repository/          # Repositories JPA
+└── service/            # Regras de negócio
+
+src/main/resources/
+├── db/migration/       # Scripts Flyway
+├── templates/          # Templates Thymeleaf
+└── application.properties
 ```
 
-4. Compile e rode a aplicação com Maven ou Gradle:  
-```bash```
-```./mvnw spring-boot:run```
+## 🧪 Executando Testes
 
-5. A aplicação iniciará na porta padrão 8080.
+```bash
+# Executar todos os testes
+./mvnw test
 
-## Utilizando o Swagger (Documentação da API)
+# Executar testes com relatório de cobertura
+./mvnw test jacoco:report
+```
 
-Após iniciar a aplicação, acesse a interface do Swagger para visualizar e testar os endpoints da API:
+## 🔧 Configurações Importantes
 
-http://localhost:8080/swagger-ui.html
+### Cache
+A aplicação utiliza cache em memória para otimizar consultas frequentes.
+
+### Segurança
+- Autenticação baseada em sessão
+- Proteção CSRF habilitada
+- Senhas criptografadas com BCrypt
+
+### Banco de Dados
+- Migrações versionadas com Flyway
 
 
-No Swagger, você pode explorar todos os recursos da API, fazer requisições e ver as respostas diretamente pelo navegador.
+## 📝 Licença
 
-## Sobre o Projeto
+Este projeto foi desenvolvido para fins acadêmicos na FIAP - Faculdade de Informática e Administração Paulista.
 
-Este projeto foi desenvolvido para gerenciar entidades relacionadas a pátios e motocicletas, utilizando Spring Boot, JPA, e banco de dados Oracle.
+---
+
+**Desenvolvido pela equipe MottuGrid**
 
 
 

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: head('Mover Motocicleta')}"></head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="container">
+    <h2>Mover Motocicleta</h2>
+    <p>
+        Movendo a motocicleta <strong><span th:text="${motorcycle.model() + ' - ' + motorcycle.plate()}"></span></strong>.
+    </p>
+
+    <form th:action="@{/motorcycles/move}" method="post">
+        <input type="hidden" name="motorcycleId" th:value="${motorcycle.id()}" />
+
+        <div class="mb-3">
+            <label for="yardId" class="form-label">Selecione o novo pátio de destino:</label>
+            <select id="yardId" name="yardId" class="form-select" required>
+                <option value="">Selecione...</option>
+                <option th:each="yard : ${yards}"
+                        th:value="${yard.id()}"
+                        th:text="${yard.name()}"
+                        th:disabled="${yard.id().equals(motorcycle.yardId())}"></option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Mover</button>
+        <a th:href="@{/motorcycles}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>
