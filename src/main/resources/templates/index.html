@@ -5,34 +5,48 @@
 <div th:replace="~{fragments/navbar :: navbar}"></div>
 
 <div class="container">
-    <h1>Dashboard</h1>
-    <p>Bem-vindo ao sistema de gerenciamento MottuGrid.</p>
+    <div class="px-4 py-5 my-5 text-center">
+        <h1 class="display-5 fw-bold">Bem-vindo ao MottuGrid</h1>
+        <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">Um sistema integrado para gerenciamento de frotas, pátios e filiais.</p>
+        </div>
+    </div>
 
-    <div class="row">
+    <!-- Seção de Estatísticas -->
+    <div class="row text-center">
         <div class="col-md-4">
-            <div class="card">
+            <div class="card mb-4 rounded-3 shadow-sm">
+                <div class="card-header py-3">
+                    <h4 class="my-0 fw-normal">Filiais</h4>
+                </div>
                 <div class="card-body">
-                    <h5 class="card-title">Gerenciar Filiais</h5>
-                    <p class="card-text">Adicione, edite e visualize as filiais.</p>
-                    <a th:href="@{/branches}" class="btn btn-primary">Ir para Filiais</a>
+                    <h1 class="card-title pricing-card-title" th:text="${stats.totalBranches}">0</h1>
+                    <p>Filiais cadastradas</p>
+                    <a th:href="@{/branches}" class="w-100 btn btn-lg btn-outline-primary">Gerenciar Filiais</a>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card">
+            <div class="card mb-4 rounded-3 shadow-sm">
+                <div class="card-header py-3">
+                    <h4 class="my-0 fw-normal">Pátios</h4>
+                </div>
                 <div class="card-body">
-                    <h5 class="card-title">Gerenciar Pátios</h5>
-                    <p class="card-text">Adicione, edite e visualize os pátios.</p>
-                    <a th:href="@{/yards}" class="btn btn-primary">Ir para Pátios</a>
+                    <h1 class="card-title pricing-card-title" th:text="${stats.totalYards}">0</h1>
+                    <p>Pátios registrados</p>
+                    <a th:href="@{/yards}" class="w-100 btn btn-lg btn-outline-primary">Gerenciar Pátios</a>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card">
+            <div class="card mb-4 rounded-3 shadow-sm">
+                <div class="card-header py-3">
+                    <h4 class="my-0 fw-normal">Motocicletas</h4>
+                </div>
                 <div class="card-body">
-                    <h5 class="card-title">Gerenciar Motocicletas</h5>
-                    <p class="card-text">Adicione, edite e visualize as motocicletas.</p>
-                    <a th:href="@{/motorcycles}" class="btn btn-primary">Ir para Motocicletas</a>
+                    <h1 class="card-title pricing-card-title" th:text="${stats.totalMotorcycles}">0</h1>
+                    <p>Motos na frota</p>
+                    <a th:href="@{/motorcycles}" class="w-100 btn btn-lg btn-outline-primary">Gerenciar Motos</a>
                 </div>
             </div>
         </div>
@@ -42,3 +56,4 @@
 <div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>
+
