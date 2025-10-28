@@ -4,32 +4,44 @@
 <body>
 <div th:replace="~{fragments/navbar :: navbar}"></div>
 
-<div class="container">
-    <h2 th:text="${pageTitle}">Formulário do Pátio</h2>
-
-    <form th:action="@{/yards/save}" th:object="${yard}" method="post">
-        <input type="hidden" name="id" th:value="${yardId}" />
-
-        <div class="mb-3">
-            <label for="name" class="form-label">Nome do Pátio:</label>
-            <input type="text" id="name" th:field="*{name}" class="form-control" />
-            <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+<div class="container mt-5">
+    <div class="card shadow-lg border-0 rounded-lg">
+        <div class="card-header bg-success text-white text-center">
+            <h3 class="h3 mb-0" th:text="${pageTitle}">Formulário do Pátio</h3>
         </div>
+        <div class="card-body p-4">
 
-        <div class="mb-3">
-            <label for="branchId" class="form-label">Filial:</label>
-            <select id="branchId" th:field="*{branchId}" class="form-select">
-                <option value="">Selecione uma Filial</option>
-                <option th:each="branch : ${branches}"
-                        th:value="${branch.id()}"
-                        th:text="${branch.name()}"></option>
-            </select>
-            <div class="text-danger" th:if="${#fields.hasErrors('branchId')}" th:errors="*{branchId}"></div>
+            <form th:action="@{/yards/save}" th:object="${yard}" method="post">
+                <input type="hidden" name="id" th:value="${yardId}" />
+
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nome do Pátio:</label>
+                    <input type="text" id="name" th:field="*{name}" class="form-control" placeholder="Ex: Pátio Central SP" />
+                    <div class="text-danger mt-1" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="branchId" class="form-label">Filial (Associação):</label>
+                    <select id="branchId" th:field="*{branchId}" class="form-select">
+                        <option value="">Selecione uma Filial</option>
+                        <option th:each="branch : ${branches}"
+                                th:value="${branch.id()}"
+                                th:text="${branch.name() + ' (' + branch.city() + ')'}"></option>
+                    </select>
+                    <div class="text-danger mt-1" th:if="${#fields.hasErrors('branchId')}" th:errors="*{branchId}"></div>
+                </div>
+
+                <div class="mt-4 d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success btn-lg">
+                        <i class="fas fa-save me-2"></i> Salvar
+                    </button>
+                    <a th:href="@{/yards}" class="btn btn-secondary btn-lg">
+                        <i class="fas fa-times-circle me-2"></i> Cancelar
+                    </a>
+                </div>
+            </form>
         </div>
-
-        <button type="submit" class="btn btn-success">Salvar</button>
-        <a th:href="@{/yards}" class="btn btn-secondary">Cancelar</a>
-    </form>
+    </div>
 </div>
 
 <div th:replace="~{fragments/footer :: footer}"></div>

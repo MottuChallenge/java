@@ -14,7 +14,6 @@ import java.util.UUID;
 @Service
 public class MotorcycleService {
 
-    // Injeção de Dependência via Construtor com 'final' (Correto)
     private final MotorcycleRepository motorcycleRepository;
     private final YardRepository yardRepository;
 
@@ -39,12 +38,13 @@ public class MotorcycleService {
 
     @Transactional(readOnly = true)
     public Motorcycle getById(UUID id) {
-        return motorcycleRepository.findById(id)
+        // CORREÇÃO AQUI: Usa o novo método do Repository que faz FETCH JOIN
+        return motorcycleRepository.findByIdWithYard(id)
                 .orElseThrow(() -> new EntityNotFoundException("Motorcycle não encontrada com id " + id));
     }
 
     @Transactional(readOnly = true)
-    // CORREÇÃO AQUI: Usa os métodos do Repository que fazem FETCH JOIN
+    // Usa os métodos do Repository que fazem FETCH JOIN
     public Page<Motorcycle> list(String model, Pageable pageable) {
         return (model == null || model.isBlank())
                 ? motorcycleRepository.findAllWithYard(pageable) // Usa FETCH JOIN

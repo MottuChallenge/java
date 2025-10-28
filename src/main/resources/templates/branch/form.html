@@ -4,36 +4,55 @@
 <body>
 <div th:replace="~{fragments/navbar :: navbar}"></div>
 
-<div class="container">
-    <h2 th:text="${pageTitle}">Formulário de Filial</h2>
+<div class="container mt-5">
+    <div class="card shadow-lg border-0 rounded-lg">
+        <div class="card-header bg-primary text-white text-center">
+            <h3 class="h3 mb-0" th:text="${pageTitle}">Formulário de Filial</h3>
+        </div>
+        <div class="card-body p-4">
 
-    <form th:action="@{/branches/save}" th:object="${branch}" method="post">
-        <input type="hidden" name="id" th:value="${branchId}" />
+            <form th:action="@{/branches/save}" th:object="${branch}" method="post">
+                <input type="hidden" name="id" th:value="${branchId}" />
 
-        <div class="mb-3">
-            <label for="name" class="form-label">Nome:</label>
-            <input type="text" id="name" th:field="*{name}" class="form-control" />
-            <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
-        </div>
-        <div class="mb-3">
-            <label for="city" class="form-label">Cidade:</label>
-            <input type="text" id="city" th:field="*{city}" class="form-control" />
-            <div class="text-danger" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></div>
-        </div>
-        <div class="mb-3">
-            <label for="state" class="form-label">Estado (UF):</label>
-            <input type="text" id="state" th:field="*{state}" class="form-control" maxlength="2" />
-            <div class="text-danger" th:if="${#fields.hasErrors('state')}" th:errors="*{state}"></div>
-        </div>
-        <div class="mb-3">
-            <label for="phone" class="form-label">Telefone:</label>
-            <input type="text" id="phone" th:field="*{phone}" class="form-control" />
-            <div class="text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></div>
-        </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="name" class="form-label">Nome:</label>
+                        <input type="text" id="name" th:field="*{name}" class="form-control" placeholder="Ex: Filial Nordeste" />
+                        <div class="text-danger mt-1" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                    </div>
 
-        <button type="submit" class="btn btn-success">Salvar</button>
-        <a th:href="@{/branches}" class="btn btn-secondary">Cancelar</a>
-    </form>
+                    <div class="col-md-6 mb-3">
+                        <label for="phone" class="form-label">Telefone:</label>
+                        <input type="text" id="phone" th:field="*{phone}" class="form-control" placeholder="Ex: (11) 99999-8888" />
+                        <div class="text-danger mt-1" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-8 mb-3">
+                        <label for="city" class="form-label">Cidade:</label>
+                        <input type="text" id="city" th:field="*{city}" class="form-control" placeholder="Ex: São Paulo" />
+                        <div class="text-danger mt-1" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></div>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label for="state" class="form-label">Estado (UF):</label>
+                        <input type="text" id="state" th:field="*{state}" class="form-control" maxlength="2" placeholder="Ex: SP" />
+                        <div class="text-danger mt-1" th:if="${#fields.hasErrors('state')}" th:errors="*{state}"></div>
+                    </div>
+                </div>
+
+                <div class="mt-4 d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success btn-lg">
+                        <i class="fas fa-save me-2"></i> Salvar
+                    </button>
+                    <a th:href="@{/branches}" class="btn btn-secondary btn-lg">
+                        <i class="fas fa-times-circle me-2"></i> Cancelar
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 <div th:replace="~{fragments/footer :: footer}"></div>

@@ -4,50 +4,66 @@
 <body>
 <div th:replace="~{fragments/navbar :: navbar}"></div>
 
-<div class="container">
-    <h2 th:text="${pageTitle}">Formulário de Motocicleta</h2>
-
-    <form th:action="@{/motorcycles/save}" th:object="${motorcycle}" method="post">
-        <input type="hidden" name="id" th:value="${motorcycleId}" />
-
-        <div class="mb-3">
-            <label for="model" class="form-label">Modelo:</label>
-            <input type="text" id="model" th:field="*{model}" class="form-control" />
-            <div class="text-danger" th:if="${#fields.hasErrors('model')}" th:errors="*{model}"></div>
+<div class="container mt-5">
+    <div class="card shadow-lg border-0 rounded-lg">
+        <div class="card-header bg-info text-white text-center">
+            <h3 class="h3 mb-0" th:text="${pageTitle}">Formulário de Motocicleta</h3>
         </div>
+        <div class="card-body p-4">
 
-        <div class="mb-3">
-            <label for="plate" class="form-label">Placa:</label>
-            <input type="text" id="plate" th:field="*{plate}" class="form-control" />
-            <div class="text-danger" th:if="${#fields.hasErrors('plate')}" th:errors="*{plate}"></div>
+            <form th:action="@{/motorcycles/save}" th:object="${motorcycle}" method="post">
+                <input type="hidden" name="id" th:value="${motorcycleId}" />
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="model" class="form-label">Modelo:</label>
+                        <input type="text" id="model" th:field="*{model}" class="form-control" placeholder="Ex: Honda Biz 110i" />
+                        <div class="text-danger mt-1" th:if="${#fields.hasErrors('model')}" th:errors="*{model}"></div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="manufacturer" class="form-label">Fabricante:</label>
+                        <input type="text" id="manufacturer" th:field="*{manufacturer}" class="form-control" placeholder="Ex: Honda" />
+                        <div class="text-danger mt-1" th:if="${#fields.hasErrors('manufacturer')}" th:errors="*{manufacturer}"></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-5 mb-3">
+                        <label for="plate" class="form-label">Placa:</label>
+                        <input type="text" id="plate" th:field="*{plate}" class="form-control" placeholder="Ex: ABC1234" />
+                        <div class="text-danger mt-1" th:if="${#fields.hasErrors('plate')}" th:errors="*{plate}"></div>
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+                        <label for="year" class="form-label">Ano:</label>
+                        <input type="number" id="year" th:field="*{year}" class="form-control" placeholder="Ex: 2023" />
+                        <div class="text-danger mt-1" th:if="${#fields.hasErrors('year')}" th:errors="*{year}"></div>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label for="yardId" class="form-label">Pátio:</label>
+                        <select id="yardId" th:field="*{yardId}" class="form-select">
+                            <option value="">Selecione um Pátio</option>
+                            <option th:each="yard : ${yards}"
+                                    th:value="${yard.id()}"
+                                    th:text="${yard.name()}"></option>
+                        </select>
+                        <div class="text-danger mt-1" th:if="${#fields.hasErrors('yardId')}" th:errors="*{yardId}"></div>
+                    </div>
+                </div>
+
+                <div class="mt-4 d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success btn-lg">
+                        <i class="fas fa-save me-2"></i> Salvar Motocicleta
+                    </button>
+                    <a th:href="@{/motorcycles}" class="btn btn-secondary btn-lg">
+                        <i class="fas fa-times-circle me-2"></i> Cancelar
+                    </a>
+                </div>
+            </form>
         </div>
-
-        <div class="mb-3">
-            <label for="manufacturer" class="form-label">Fabricante:</label>
-            <input type="text" id="manufacturer" th:field="*{manufacturer}" class="form-control" />
-            <div class="text-danger" th:if="${#fields.hasErrors('manufacturer')}" th:errors="*{manufacturer}"></div>
-        </div>
-
-        <div class="mb-3">
-            <label for="year" class="form-label">Ano:</label>
-            <input type="number" id="year" th:field="*{year}" class="form-control" />
-            <div class="text-danger" th:if="${#fields.hasErrors('year')}" th:errors="*{year}"></div>
-        </div>
-
-        <div class="mb-3">
-            <label for="yardId" class="form-label">Pátio:</label>
-            <select id="yardId" th:field="*{yardId}" class="form-select">
-                <option value="">Selecione um Pátio</option>
-                <option th:each="yard : ${yards}"
-                        th:value="${yard.id()}"
-                        th:text="${yard.name()}"></option>
-            </select>
-            <div class="text-danger" th:if="${#fields.hasErrors('yardId')}" th:errors="*{yardId}"></div>
-        </div>
-
-        <button type="submit" class="btn btn-success">Salvar</button>
-        <a th:href="@{/motorcycles}" class="btn btn-secondary">Cancelar</a>
-    </form>
+    </div>
 </div>
 
 <div th:replace="~{fragments/footer :: footer}"></div>

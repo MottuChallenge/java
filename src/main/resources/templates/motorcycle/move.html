@@ -4,29 +4,45 @@
 <body>
 <div th:replace="~{fragments/navbar :: navbar}"></div>
 
-<div class="container">
-    <h2>Mover Motocicleta</h2>
-    <p>
-        Movendo a motocicleta <strong><span th:text="${motorcycle.model() + ' - ' + motorcycle.plate()}"></span></strong>.
-    </p>
-
-    <form th:action="@{/motorcycles/move}" method="post">
-        <input type="hidden" name="motorcycleId" th:value="${motorcycle.id()}" />
-
-        <div class="mb-3">
-            <label for="yardId" class="form-label">Selecione o novo pátio de destino:</label>
-            <select id="yardId" name="yardId" class="form-select" required>
-                <option value="">Selecione...</option>
-                <option th:each="yard : ${yards}"
-                        th:value="${yard.id()}"
-                        th:text="${yard.name()}"
-                        th:disabled="${yard.id().equals(motorcycle.yardId())}"></option>
-            </select>
+<div class="container mt-5">
+    <div class="card shadow-lg border-0 rounded-lg">
+        <div class="card-header bg-primary text-white text-center">
+            <h3 class="h3 mb-0"><i class="fas fa-truck-moving me-2"></i> Mover Motocicleta</h3>
         </div>
+        <div class="card-body p-4">
+            <p class="lead text-center">
+                Movendo a motocicleta <strong><span th:text="${motorcycle.model() + ' - ' + motorcycle.plate()}"></span></strong>.
+                <br>
+                Localização Atual: <span class="badge bg-warning text-dark" th:text="${motorcycle.yardName()}">Pátio X</span>
+            </p>
 
-        <button type="submit" class="btn btn-primary">Mover</button>
-        <a th:href="@{/motorcycles}" class="btn btn-secondary">Cancelar</a>
-    </form>
+            <hr>
+
+            <form th:action="@{/motorcycles/move}" method="post">
+                <input type="hidden" name="motorcycleId" th:value="${motorcycle.id()}" />
+
+                <div class="mb-4">
+                    <label for="yardId" class="form-label fs-5">Selecione o novo pátio de destino:</label>
+                    <select id="yardId" name="yardId" class="form-select form-select-lg" required>
+                        <option value="">Selecione...</option>
+                        <option th:each="yard : ${yards}"
+                                th:value="${yard.id()}"
+                                th:text="${yard.name()}"
+                                th:disabled="${yard.id().equals(motorcycle.yardId())}"></option>
+                    </select>
+                </div>
+
+                <div class="mt-4 d-flex justify-content-between">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        <i class="fas fa-arrow-right me-2"></i> Mover
+                    </button>
+                    <a th:href="@{/motorcycles}" class="btn btn-secondary btn-lg">
+                        <i class="fas fa-times-circle me-2"></i> Cancelar
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 <div th:replace="~{fragments/footer :: footer}"></div>

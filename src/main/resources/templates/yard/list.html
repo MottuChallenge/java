@@ -1,35 +1,58 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/header :: head('Pátios')}"></head>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/header :: head('Gerenciamento de Pátios')}"></head>
 <body>
 <div th:replace="~{fragments/navbar :: navbar}"></div>
 
-<div class="container">
-    <h2>Gerenciamento de Pátios</h2>
-    <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
-    <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4 p-3 bg-white shadow-sm rounded">
+        <h2><i class="fas fa-warehouse me-2 text-success"></i> Gerenciamento de Pátios</h2>
+        <a th:href="@{/yards/new}" class="btn btn-success btn-lg">
+            <i class="fas fa-plus me-2"></i> Novo Pátio
+        </a>
+    </div>
 
-    <a th:href="@{/yards/new}" class="btn btn-primary mb-3">Novo Pátio</a>
+    <div th:if="${message}" class="alert alert-success alert-dismissible fade show" role="alert">
+        <span th:text="${message}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <span th:text="${error}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
 
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Nome</th>
-            <th>Ações</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="yard : ${page.content}">
-            <td th:text="${yard.name()}">Nome do Pátio</td>
-            <td>
-                <a th:href="@{|/yards/edit/${yard.id()}|}" class="btn btn-sm btn-warning">Editar</a>
-                <a th:href="@{|/yards/delete/${yard.id()}|}" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <table class="table table-hover table-striped">
+                <thead class="table-success">
+                <tr>
+                    <th>Nome</th>
+                    <th>Filial Associada (ID)</th>
+                    <th>Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="yard : ${page.content}">
+                    <td th:text="${yard.name()}">Nome do Pátio</td>
+                    <td th:text="${yard.branchId()}">ID da Filial</td>
+                    <td>
+                        <a th:href="@{|/yards/edit/${yard.id()}|}" class="btn btn-sm btn-warning me-2" title="Editar">
+                            <i class="fas fa-edit"></i> Editar
+                        </a>
+                        <a sec:authorize="hasAuthority('ROLE_ADMIN')" th:href="@{|/yards/delete/${yard.id()}|}" class="btn btn-sm btn-danger" title="Excluir" onclick="return confirm('ATENÇÃO: A exclusão é permanente e pode falhar se houver motocicletas associadas. Tem certeza que deseja excluir?')">
+                            <i class="fas fa-trash-alt"></i> Excluir
+                        </a>
+                    </td>
+                </tr>
+                <tr th:if="${page.content.isEmpty()}">
+                    <td colspan="3" class="text-center text-muted">Nenhum pátio encontrado.</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-    <nav aria-label="Paginação" th:if="${page.totalPages > 0}">
+    <nav aria-label="Paginação" th:if="${page.totalPages > 1}" class="mt-4">
         <ul class="pagination justify-content-center">
             <li class="page-item" th:classappend="${page.first} ? 'disabled'">
                 <a class="page-link" th:href="@{/yards(page=0, size=${page.size}, name=${name})}">Primeira</a>
@@ -49,7 +72,6 @@
             </li>
         </ul>
     </nav>
-
 </div>
 
 <div th:replace="~{fragments/footer :: footer}"></div>
