@@ -1,11 +1,13 @@
 package br.com.mottugrid_java.controller;
 
+import br.com.mottugrid_java.domainmodel.Branch;
 import br.com.mottugrid_java.dto.BranchRequestDTO;
 import br.com.mottugrid_java.dto.BranchResponseDTO;
 import br.com.mottugrid_java.service.BranchService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,33 +20,62 @@ import java.util.UUID;
 @RequestMapping("/branches")
 public class BranchWebController {
 
-    @Autowired
-    private BranchService branchService;
+    private final BranchService branchService;
+
+    public BranchWebController(BranchService branchService) {
+        this.branchService = branchService;
+    }
 
     @GetMapping
-    public String listBranches(Model model) {
-        model.addAttribute("branches", branchService.list(null, Pageable.unpaged()).getContent());
+    public String listBranches(
+            @RequestParam(required = false) String name,
+            @PageableDefault(size = 10, sort = "name") Pageable pageable, // Recebe paginação
+            Model model) {
+
+        Page<Branch> entityPage = branchService.list(name, pageable);
+
+        Page<BranchResponseDTO> responsePage = entityPage.map(branch ->
+                new BranchResponseDTO(
+                        branch.getId(),
+                        branch.getName(),
+                        branch.getCity(),
+                        branch.getState(),
+                        branch.getPhone()
+                )
+        );
+
+        model.addAttribute("page", responsePage);
+        model.addAttribute("name", name);
+
         return "branch/list";
     }
 
     @GetMapping("/new")
     public String showCreateForm(Model model) {
-        model.addAttribute("branch", new BranchRequestDTO("", "", "", ""));
+        // Inicializa DTO vazio
+        model.addAttribute("branch", new BranchRequestDTO(null, null, null, null));
         model.addAttribute("pageTitle", "Nova Filial");
         return "branch/form";
     }
 
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable UUID id, Model model) {
-        BranchResponseDTO dto = branchService.getById(id);
-        BranchRequestDTO requestDTO = new BranchRequestDTO(dto.name(), dto.city(), dto.state(), dto.phone());
+
+        Branch branch = branchService.getById(id);
+
+        BranchRequestDTO requestDTO = new BranchRequestDTO(
+                branch.getName(),
+                branch.getCity(),
+                branch.getState(),
+                branch.getPhone()
+        );
+
         model.addAttribute("branch", requestDTO);
-        model.addAttribute("branchId", id);
         model.addAttribute("pageTitle", "Editar Filial");
         return "branch/form";
     }
 
-    @PostMapping("/save")
+    @PostMapping("/save") // Mapeamento corrigido
     public String saveBranch(@Valid @ModelAttribute("branch") BranchRequestDTO dto,
                              @RequestParam(value = "id", required = false) UUID id,
                              BindingResult result,
@@ -55,11 +86,18 @@ public class BranchWebController {
             return "branch/form";
         }
 
+        Branch branchEntity = Branch.builder()
+                .name(dto.name())
+                .city(dto.city())
+                .state(dto.state())
+                .phone(dto.phone())
+                .build();
+
         if (id == null) {
-            branchService.create(dto);
+            branchService.create(branchEntity); // Service espera Entidade
             redirectAttributes.addFlashAttribute("message", "Filial criada com sucesso!");
         } else {
-            branchService.update(id, dto);
+            branchService.update(id, branchEntity); // Service espera Entidade
             redirectAttributes.addFlashAttribute("message", "Filial atualizada com sucesso!");
         }
         return "redirect:/branches";

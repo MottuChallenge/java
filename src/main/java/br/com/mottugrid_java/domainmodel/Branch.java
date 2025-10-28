@@ -2,7 +2,6 @@ package br.com.mottugrid_java.domainmodel;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.util.UUID;
 import java.util.List;
@@ -35,6 +34,7 @@ public class Branch {
 
     @OneToMany(mappedBy = "branch", cascade = CascadeType.ALL, orphanRemoval = true)
     @Setter(AccessLevel.NONE)
+    @Builder.Default
     private List<Yard> yards = new ArrayList<>();
 
 

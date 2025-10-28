@@ -3,7 +3,6 @@ package br.com.mottugrid_java.domainmodel;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.util.UUID;
 
@@ -30,12 +29,11 @@ public class Yard {
     private Branch branch;
 
     public void setBranch(Branch branch) {
-        // Remove de branch antiga, se existir
-        if (this.branch != null) {
+        if (this.branch != null && this.branch != branch) {
             this.branch.getYards().remove(this);
         }
         this.branch = branch;
-        // Adiciona na nova branch, se não estiver lá
+
         if (branch != null && !branch.getYards().contains(this)) {
             branch.getYards().add(this);
         }

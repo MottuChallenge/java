@@ -1,12 +1,11 @@
 package br.com.mottugrid_java.service;
 
 import br.com.mottugrid_java.domainmodel.Branch;
-import br.com.mottugrid_java.dto.BranchRequestDTO;
-import br.com.mottugrid_java.dto.BranchResponseDTO;
+// DTO IMPORTS REMOVIDOS
 import br.com.mottugrid_java.repository.BranchRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+// @Autowired REMOVIDO
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
@@ -16,43 +15,44 @@ import java.util.UUID;
 @Service
 public class BranchService {
 
-    @Autowired
-    private BranchRepository branchRepository;
+    private final BranchRepository branchRepository;
+
+    // Construtor para Injeção de Dependência (Best Practice)
+    public BranchService(BranchRepository branchRepository) {
+        this.branchRepository = branchRepository;
+    }
+
     @Transactional
-    // CREATE
-    public BranchResponseDTO create(BranchRequestDTO dto) {
-        Branch branch = toEntity(dto);
-        return toResponse(branchRepository.save(branch));
+    // CREATE: Recebe Branch e retorna Branch
+    public Branch create(Branch branch) {
+        return branchRepository.save(branch);
     }
 
 
-    // READ (by ID)
-    public BranchResponseDTO getById(UUID id) {
-        Branch branch = branchRepository.findById(id)
+    // READ (by ID): Retorna Branch
+    public Branch getById(UUID id) {
+        return branchRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Branch não encontrada com id " + id));
-        return toResponse(branch);
     }
 
-    // READ (paginated + optional filter by name)
-    public Page<BranchResponseDTO> list(String name, Pageable pageable) {
-        Page<Branch> page = (name == null || name.isBlank())
+    // READ (paginated): Retorna Page<Branch>
+    public Page<Branch> list(String name, Pageable pageable) {
+        return (name == null || name.isBlank())
                 ? branchRepository.findAll(pageable)
                 : branchRepository.findByNameContainingIgnoreCase(name, pageable);
-
-        return page.map(this::toResponse);
     }
     @Transactional
-    // UPDATE
-    public BranchResponseDTO update(UUID id, BranchRequestDTO dto) {
+    // UPDATE: Recebe Branch e retorna Branch
+    public Branch update(UUID id, Branch updatedBranch) {
         Branch branch = branchRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Branch não encontrada com id " + id));
 
-        branch.setName(dto.name());
-        branch.setCity(dto.city());
-        branch.setState(dto.state());
-        branch.setPhone(dto.phone());
+        branch.setName(updatedBranch.getName());
+        branch.setCity(updatedBranch.getCity());
+        branch.setState(updatedBranch.getState());
+        branch.setPhone(updatedBranch.getPhone());
 
-        return toResponse(branchRepository.save(branch));
+        return branchRepository.save(branch);
     }
     @Transactional
     // DELETE
@@ -63,25 +63,5 @@ public class BranchService {
         branchRepository.deleteById(id);
     }
 
-
-    // Converte DTO para entidade
-    private Branch toEntity(BranchRequestDTO dto) {
-        return Branch.builder()
-                .name(dto.name())
-                .city(dto.city())
-                .state(dto.state())
-                .phone(dto.phone())
-                .build();
-    }
-
-    // Converte entidade para DTO
-    private BranchResponseDTO toResponse(Branch branch) {
-        return new BranchResponseDTO(
-                branch.getId(),
-                branch.getName(),
-                branch.getCity(),
-                branch.getState(),
-                branch.getPhone()
-        );
-    }
+    // MÉTODOS toEntity e toResponse REMOVIDOS
 }

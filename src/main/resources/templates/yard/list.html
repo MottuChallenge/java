@@ -19,7 +19,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="yard : ${yards}">
+        <tr th:each="yard : ${page.content}">
             <td th:text="${yard.name()}">Nome do Pátio</td>
             <td>
                 <a th:href="@{|/yards/edit/${yard.id()}|}" class="btn btn-sm btn-warning">Editar</a>
@@ -28,6 +28,28 @@
         </tr>
         </tbody>
     </table>
+
+    <nav aria-label="Paginação" th:if="${page.totalPages > 0}">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:classappend="${page.first} ? 'disabled'">
+                <a class="page-link" th:href="@{/yards(page=0, size=${page.size}, name=${name})}">Primeira</a>
+            </li>
+            <li class="page-item" th:classappend="${page.hasPrevious} ? '' : 'disabled'">
+                <a class="page-link" th:href="@{/yards(page=${page.number - 1}, size=${page.size}, name=${name})}">Anterior</a>
+            </li>
+            <li class="page-item" th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}"
+                th:classappend="${i == page.number} ? 'active'">
+                <a class="page-link" th:href="@{/yards(page=${i}, size=${page.size}, name=${name})}" th:text="${i + 1}">1</a>
+            </li>
+            <li class="page-item" th:classappend="${page.hasNext} ? '' : 'disabled'">
+                <a class="page-link" th:href="@{/yards(page=${page.number + 1}, size=${page.size}, name=${name})}">Próxima</a>
+            </li>
+            <li class="page-item" th:classappend="${page.last} ? 'disabled'">
+                <a class="page-link" th:href="@{/yards(page=${page.totalPages - 1}, size=${page.size}, name=${name})}">Última</a>
+            </li>
+        </ul>
+    </nav>
+
 </div>
 
 <div th:replace="~{fragments/footer :: footer}"></div>
