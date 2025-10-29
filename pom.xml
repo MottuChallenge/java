@@ -17,10 +17,10 @@
 	<name>MottuGrid_Java</name>
 	<description>Projeto Java Advanced com Spring Boot, Oracle, Flyway e Thymeleaf</description>
 
-	<properties>
-		<java.version>17</java.version>
-	</properties>
-
+    <properties>
+        <java.version>17</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 	<dependencies>
 		<!-- Spring Boot Starters -->
 		<dependency>
